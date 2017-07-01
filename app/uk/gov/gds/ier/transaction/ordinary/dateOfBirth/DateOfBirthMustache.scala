@@ -2,7 +2,7 @@ package uk.gov.gds.ier.transaction.ordinary.dateOfBirth
 
 import uk.gov.gds.ier.validation.{CountryValidator, ErrorTransformForm}
 import play.api.mvc.Call
-import play.api.templates.Html
+import play.twirl.api.Html
 import uk.gov.gds.ier.step.StepTemplate
 import uk.gov.gds.ier.transaction.ordinary.InprogressOrdinary
 import play.api.data.validation.Constraint
@@ -104,4 +104,3 @@ trait DateOfBirthMustache extends StepTemplate[InprogressOrdinary] {
     )
   }
 }
-

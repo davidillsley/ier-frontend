@@ -12,6 +12,8 @@ import uk.gov.gds.ier.form.OverseasFormImplicits
 import uk.gov.gds.ier.transaction.overseas.InprogressOverseas
 import uk.gov.gds.ier.step.GoTo
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 
 @Singleton
 class LastUkAddressStep @Inject() (
@@ -20,12 +22,14 @@ class LastUkAddressStep @Inject() (
     val encryptionService: EncryptionService,
     val addressService: AddressService,
     val remoteAssets: RemoteAssets,
-    val overseas: OverseasControllers
+    val overseas: OverseasControllers,
+    val Messages: Messages
 ) extends OverseaStep
   with LastUkAddressLookupMustache
   with LastUkAddressForms
   with OverseasFormImplicits
-  with WithAddressService {
+  with WithAddressService
+  with WithMessages {
 
   val validation = lookupAddressForm
 

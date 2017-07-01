@@ -9,6 +9,8 @@ import uk.gov.gds.ier.service.AddressService
 import uk.gov.gds.ier.step.{ForcesStep, Routes}
 import uk.gov.gds.ier.transaction.forces.InprogressForces
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 
 @Singleton
 class PreviousAddressPostcodeStep @Inject() (
@@ -17,10 +19,12 @@ class PreviousAddressPostcodeStep @Inject() (
     val encryptionService: EncryptionService,
     val addressService: AddressService,
     val remoteAssets: RemoteAssets,
-    val forces: ForcesControllers
+    val forces: ForcesControllers,
+    val Messages: Messages
 ) extends ForcesStep
   with PreviousAddressPostcodeMustache
-  with PreviousAddressForms {
+  with PreviousAddressForms
+  with WithMessages {
 
   val validation = postcodeAddressFormForPreviousAddress
 

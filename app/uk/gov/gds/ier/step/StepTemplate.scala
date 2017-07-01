@@ -15,10 +15,10 @@ trait StepTemplate[T]
 
   type Call = play.api.mvc.Call
   val Call = play.api.mvc.Call
-  type Html = play.api.templates.Html
+  type Html = play.twirl.api.Html
   type MustacheTemplate = uk.gov.gds.ier.mustache.MustacheTemplate[T]
   type MustacheData = uk.gov.gds.ier.mustache.MustacheData
-  val Messages = uk.gov.gds.ier.langs.Messages
+  val Messages: uk.gov.gds.ier.langs.Messages
 
   val mustache: MustacheTemplate
 

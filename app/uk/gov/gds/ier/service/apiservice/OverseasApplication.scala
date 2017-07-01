@@ -1,6 +1,5 @@
 package uk.gov.gds.ier.service.apiservice
 
-import uk.gov.gds.common.model.LocalAuthority
 import uk.gov.gds.ier.model._
 
 case class OverseasApplication(

@@ -14,6 +14,8 @@ import uk.gov.gds.ier.model.PartialPreviousAddress
 import uk.gov.gds.ier.model.MovedHouseOption
 import uk.gov.gds.ier.transaction.forces.InprogressForces
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 
 @Singleton
 class PreviousAddressSelectStep @Inject() (
@@ -22,11 +24,13 @@ class PreviousAddressSelectStep @Inject() (
     val encryptionService: EncryptionService,
     val addressService: AddressService,
     val remoteAssets: RemoteAssets,
-    val forces: ForcesControllers
+    val forces: ForcesControllers,
+    val Messages: Messages
 ) extends ForcesStep
   with PreviousAddressSelectMustache
   with PreviousAddressForms
-  with WithAddressService {
+  with WithAddressService
+  with WithMessages {
 
   val validation = selectAddressFormForPreviousAddress
 

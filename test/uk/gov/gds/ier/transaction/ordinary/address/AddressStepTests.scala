@@ -1,5 +1,6 @@
 package uk.gov.gds.ier.transaction.ordinary.address
 
+import play.Configuration
 import uk.gov.gds.ier.test.ControllerTestSuite
 import uk.gov.gds.ier.DynamicGlobal
 import uk.gov.gds.ier.config.Config
@@ -7,15 +8,15 @@ import uk.gov.gds.ier.config.Config
 class AddressStepTests extends ControllerTestSuite {
 
   private def createGlobalConfigWith(availableForScotlandFlag: Boolean) = {
-    val mockConfig = new Config {
+    val mockConfig = new Config(Configuration.root()) {
       override def availableForScotland = availableForScotlandFlag
     }
-
-    Some(new DynamicGlobal {
-      override def bindings = { binder =>
-        binder bind classOf[uk.gov.gds.ier.config.Config] toInstance mockConfig
-      }
-    })
+//
+//    Some(new DynamicGlobal {
+//      override def bindings = { binder =>
+//        binder bind classOf[uk.gov.gds.ier.config.Config] toInstance mockConfig
+//      }
+//    })
   }
 
   behavior of "AddressStep.get"
@@ -68,7 +69,7 @@ class AddressStepTests extends ControllerTestSuite {
 
   def appWithScottishAddressWith(availableForScotlandFlag: Boolean, andRedirectsToUrl: String) {
     it should s"redirect $andRedirectsToUrl for Scottish postcode with availableForScotlandFlag: $availableForScotlandFlag" in {
-      running(FakeApplication(withGlobal = createGlobalConfigWith(availableForScotlandFlag = availableForScotlandFlag))) {
+      running(FakeApplication(Map("ier.availableForScotland" -> "true"))) {
         val Some(result) = route(
           FakeRequest(POST, "/register-to-vote/address")
             .withIerSession()
@@ -200,7 +201,7 @@ class AddressStepTests extends ControllerTestSuite {
 
   def editedAppWithScottishAddressWith(availableForScotlandFlag: Boolean, andRedirectsToUrl: String) {
     it should s"redirect $andRedirectsToUrl for Scottish postcode with availableForScotlandFlag: $availableForScotlandFlag" in {
-      running(FakeApplication(withGlobal = createGlobalConfigWith(availableForScotlandFlag = availableForScotlandFlag))) {
+      running(FakeApplication(Map("ier.availableForScotland" -> "true"))) {
         val Some(result) = route(
           FakeRequest(POST, "/register-to-vote/edit/address")
             .withIerSession()

@@ -7,9 +7,11 @@ import uk.gov.gds.ier.serialiser.JsonSerialiser
 import uk.gov.gds.ier.validation._
 import uk.gov.gds.ier.config.Config
 import uk.gov.gds.ier.security.EncryptionService
-import uk.gov.gds.ier.step.{OverseaStep, Routes, GoTo}
+import uk.gov.gds.ier.step.{GoTo, OverseaStep, Routes}
 import uk.gov.gds.ier.transaction.overseas.InprogressOverseas
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 
 @Singleton
 class DateOfBirthStep @Inject ()(
@@ -17,10 +19,12 @@ class DateOfBirthStep @Inject ()(
     val config: Config,
     val encryptionService : EncryptionService,
     val remoteAssets: RemoteAssets,
-    val overseas: OverseasControllers
+    val overseas: OverseasControllers,
+    val Messages: Messages
 ) extends OverseaStep
   with DateOfBirthForms
-  with DateOfBirthMustache {
+  with DateOfBirthMustache
+  with WithMessages {
 
   val validation = dateOfBirthForm
 

@@ -12,7 +12,6 @@ import uk.gov.gds.ier.model.{
 import uk.gov.gds.ier.logging.Logging
 import uk.gov.gds.ier.serialiser.JsonSerialiser
 import uk.gov.gds.ier.config.Config
-import uk.gov.gds.ier.digest.ShaHashProvider
 import org.joda.time.DateTime
 import uk.gov.gds.ier.service._
 import uk.gov.gds.ier.step.InprogressApplication
@@ -66,7 +65,6 @@ class ConcreteIerApiService @Inject() (
     serialiser: JsonSerialiser,
     config: Config,
     addressService: AddressService,
-    shaHashProvider:ShaHashProvider,
     isoCountryService: IsoCountryService
   ) extends IerApiService with Logging {
 

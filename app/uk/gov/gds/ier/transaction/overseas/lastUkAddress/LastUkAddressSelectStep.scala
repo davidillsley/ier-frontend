@@ -5,12 +5,14 @@ import com.google.inject.{Inject, Singleton}
 import uk.gov.gds.ier.config.Config
 import uk.gov.gds.ier.model.ApplicationType
 import uk.gov.gds.ier.security.EncryptionService
-import uk.gov.gds.ier.serialiser.{WithSerialiser, JsonSerialiser}
+import uk.gov.gds.ier.serialiser.{JsonSerialiser, WithSerialiser}
 import uk.gov.gds.ier.service.{AddressService, WithAddressService}
 import uk.gov.gds.ier.step.{OverseaStep, Routes}
 import uk.gov.gds.ier.form.OverseasFormImplicits
 import uk.gov.gds.ier.transaction.overseas.InprogressOverseas
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 
 @Singleton
 class LastUkAddressSelectStep @Inject() (
@@ -19,13 +21,15 @@ class LastUkAddressSelectStep @Inject() (
     val encryptionService: EncryptionService,
     val addressService: AddressService,
     val remoteAssets: RemoteAssets,
-    val overseas: OverseasControllers
+    val overseas: OverseasControllers,
+    val Messages: Messages
 ) extends OverseaStep
   with LastUkAddressSelectMustache
   with LastUkAddressForms
   with OverseasFormImplicits
   with WithSerialiser
-  with WithAddressService {
+  with WithAddressService
+  with WithMessages {
 
   val validation = lastUkAddressForm
 

@@ -1,13 +1,14 @@
 package uk.gov.gds.ier.assets
 
 import controllers.AssetsBuilder
-import com.google.inject.{Singleton, Inject}
+import javax.inject.{Inject, Singleton}
+import play.api.http.HttpErrorHandler
 
 @Singleton
-class Assets extends AssetsBuilder
+class Assets @Inject() (errorHandler: HttpErrorHandler) extends AssetsBuilder(errorHandler)
 
 @Singleton
-class GovukToolkit extends AssetsBuilder
+class GovukToolkit @Inject() (errorHandler: HttpErrorHandler) extends AssetsBuilder(errorHandler)
 
 @Singleton
-class Template extends AssetsBuilder
+class Template @Inject() (errorHandler: HttpErrorHandler) extends AssetsBuilder(errorHandler)

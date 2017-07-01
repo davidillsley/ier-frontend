@@ -1,7 +1,8 @@
 package uk.gov.gds.ier.service
 
-import uk.gov.gds.ier.test.{WithMockConfig, MockingTestSuite}
-import uk.gov.gds.ier.model.{PartialManualAddress, Address, PartialAddress}
+import play.Configuration
+import uk.gov.gds.ier.test.{MockingTestSuite, WithMockConfig}
+import uk.gov.gds.ier.model.{Address, PartialAddress, PartialManualAddress}
 import uk.gov.gds.ier.config.Config
 
 class AddressServiceTests extends MockingTestSuite with WithMockConfig {
@@ -286,7 +287,7 @@ class AddressServiceTests extends MockingTestSuite with WithMockConfig {
     new AddressService(locateService, config)
   }
 
-  class MockConfig extends Config {
+  class MockConfig extends Config(Configuration.root()) {
     override def locateUrl = "http://locate/addresses"
     override def locateAuthorityUrl = "http://locate/authority"
     override def locateApiAuthorizationToken = "abc"

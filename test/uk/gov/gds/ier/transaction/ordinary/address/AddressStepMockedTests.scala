@@ -2,12 +2,11 @@ package uk.gov.gds.ier.transaction.ordinary.address
 
 import org.scalatest.FlatSpec
 import org.scalatest.Matchers
-import org.specs2.mock.Mockito
 import uk.gov.gds.ier.config.Config
-import uk.gov.gds.ier.model.{DOB, DateOfBirth, Country, PartialAddress}
+import uk.gov.gds.ier.model.{Country, DOB, DateOfBirth, PartialAddress}
 import uk.gov.gds.ier.security.EncryptionService
 import uk.gov.gds.ier.serialiser.JsonSerialiser
-import uk.gov.gds.ier.test.TestHelpers
+import uk.gov.gds.ier.test.{MockingTestSuite, TestHelpers}
 import uk.gov.gds.ier.service.AddressService
 import uk.gov.gds.ier.step.GoTo
 import uk.gov.gds.ier.controller.routes.ExitController
@@ -16,13 +15,14 @@ import uk.gov.gds.ier.assets.RemoteAssets
 import uk.gov.gds.ier.transaction.ordinary.{InprogressOrdinary, OrdinaryControllers}
 import uk.gov.gds.ier.transaction.ordinary.name.NameStep
 import org.joda.time.LocalDate
+import uk.gov.gds.ier.langs.Messages
 
 /*
  * This test mock the AddressService.
  *
  * So it is separated from the normal AddressStepTests
  */
-class AddressStepMockedTests extends FlatSpec with TestHelpers with Matchers with Mockito {
+class AddressStepMockedTests extends MockingTestSuite {
 
   it should "redirect to too-young-not-scotland-15 exit page if the gssCode starts with S & young Scot status" in {
     val mockedJsonSerialiser = mock[JsonSerialiser]
@@ -31,6 +31,7 @@ class AddressStepMockedTests extends FlatSpec with TestHelpers with Matchers wit
     val mockedAddressService = mock[AddressService]
     val mockedRemoteAssets = mock[RemoteAssets]
     val mockedControllers = mock[OrdinaryControllers]
+    val mockMessages = mock[Messages]
 
     val addressStep = new AddressStep(
       mockedJsonSerialiser,
@@ -38,7 +39,8 @@ class AddressStepMockedTests extends FlatSpec with TestHelpers with Matchers wit
       mockedEncryptionService,
       mockedAddressService,
       mockedRemoteAssets,
-      mockedControllers
+      mockedControllers,
+      mockMessages
     )
 
     val postcode = "L7 7AJ"
@@ -63,6 +65,7 @@ class AddressStepMockedTests extends FlatSpec with TestHelpers with Matchers wit
     val mockedAddressService = mock[AddressService]
     val mockedRemoteAssets = mock[RemoteAssets]
     val mockedControllers = mock[OrdinaryControllers]
+    val mockMessages = mock[Messages]
 
     val addressStep = new AddressStep(
       mockedJsonSerialiser,
@@ -70,7 +73,8 @@ class AddressStepMockedTests extends FlatSpec with TestHelpers with Matchers wit
       mockedEncryptionService,
       mockedAddressService,
       mockedRemoteAssets,
-      mockedControllers
+      mockedControllers,
+      mockMessages
     )
 
     val postcode = "L7 7AJ"

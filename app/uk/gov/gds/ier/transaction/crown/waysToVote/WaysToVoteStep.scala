@@ -7,11 +7,13 @@ import uk.gov.gds.ier.config.Config
 import uk.gov.gds.ier.security.EncryptionService
 import uk.gov.gds.ier.step.CrownStep
 import uk.gov.gds.ier.step.Routes
-import uk.gov.gds.ier.model.{WaysToVoteType}
+import uk.gov.gds.ier.model.WaysToVoteType
 import uk.gov.gds.ier.validation.ErrorTransformForm
 import uk.gov.gds.ier.model.WaysToVote
 import uk.gov.gds.ier.transaction.crown.InprogressCrown
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 
 @Singleton
 class WaysToVoteStep @Inject ()(
@@ -19,10 +21,12 @@ class WaysToVoteStep @Inject ()(
     val config: Config,
     val encryptionService : EncryptionService,
     val remoteAssets: RemoteAssets,
-    val crown: CrownControllers
+    val crown: CrownControllers,
+    val Messages: Messages
 ) extends CrownStep
   with WaysToVoteForms
-  with WaysToVoteMustache {
+  with WaysToVoteMustache
+  with WithMessages {
 
   val validation = waysToVoteForm
 

@@ -11,6 +11,8 @@ import uk.gov.gds.ier.step.{OverseaStep, Routes}
 import uk.gov.gds.ier.transaction.overseas.InprogressOverseas
 import uk.gov.gds.ier.step.GoTo
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 
 @Singleton
 class ParentsAddressStep @Inject() (
@@ -19,11 +21,13 @@ class ParentsAddressStep @Inject() (
     val encryptionService: EncryptionService,
     val addressService: AddressService,
     val remoteAssets: RemoteAssets,
-    val overseas: OverseasControllers
+    val overseas: OverseasControllers,
+    val Messages: Messages
 ) extends OverseaStep
   with ParentsAddressLookupMustache
   with ParentsAddressForms
-  with WithAddressService {
+  with WithAddressService
+  with WithMessages {
 
   val validation = parentsLookupAddressForm
 

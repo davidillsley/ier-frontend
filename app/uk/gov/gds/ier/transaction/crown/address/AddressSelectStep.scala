@@ -10,6 +10,8 @@ import uk.gov.gds.ier.service.{AddressService, WithAddressService}
 import uk.gov.gds.ier.step.{CrownStep, Routes}
 import uk.gov.gds.ier.transaction.crown.InprogressCrown
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 
 @Singleton
 class AddressSelectStep @Inject() (
@@ -18,11 +20,13 @@ class AddressSelectStep @Inject() (
     val encryptionService: EncryptionService,
     val addressService: AddressService,
     val remoteAssets: RemoteAssets,
-    val crown: CrownControllers
+    val crown: CrownControllers,
+    val Messages: Messages
 ) extends CrownStep
   with AddressSelectMustache
   with AddressForms
-  with WithAddressService {
+  with WithAddressService
+  with WithMessages {
 
   val validation = addressForm
 

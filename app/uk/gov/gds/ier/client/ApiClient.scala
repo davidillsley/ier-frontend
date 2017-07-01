@@ -1,18 +1,19 @@
 package uk.gov.gds.ier.client
 
-import uk.gov.gds.ier.model.{Fail, ApiResponse, Success}
-import play.api.libs.ws.{WS, Response}
+import java.util.concurrent.TimeUnit
+
+import uk.gov.gds.ier.model.{ApiResponse, Fail, Success}
+import play.api.libs.ws.{WS, WSAuthScheme, WSClient, WSResponse}
+
 import scala.concurrent.duration._
 import scala.concurrent.Await
 import play.api.http._
-import uk.gov.gds.ier.guice.WithConfig
+import uk.gov.gds.ier.guice.{WithApplication, WithConfig}
 import org.joda.time.DateTime
 import uk.gov.gds.ier.logging.Logging
-import com.ning.http.client.Realm.AuthScheme
-
 
 trait ApiClient extends Logging {
-  self:WithConfig =>
+  self:WithConfig with WithApplication =>
 
   def get(url: String, headers: (String, String)*) : ApiResponse = {
 	val start = new DateTime()
@@ -101,10 +102,10 @@ trait ApiClient extends Logging {
   ): Unit = {
     implicit val context = scala.concurrent.ExecutionContext.Implicits.global
     WS.url(url)
-      .withAuth(username, password, AuthScheme.BASIC)
+      .withAuth(username, password, WSAuthScheme.BASIC)
       .withHeaders("Content-Type" -> MimeTypes.JSON)
       .withHeaders(headers: _*)
-      .withRequestTimeout(config.apiTimeout.seconds.toMillis.toInt)
+      .withRequestTimeout((config.apiTimeout * 1000) milliseconds)
       .post(content)
       .map {
       // we are not really interested in response, just log it
@@ -133,5 +134,5 @@ trait ApiClient extends Logging {
     def unapply(statusCode: Int) = Option(statusCode).map { c => successStatusCodes.contains(c) }
   }
 
-  protected def awaitResultFor(block: => Response): Response = block
+  protected def awaitResultFor(block: => WSResponse): WSResponse = block
 }

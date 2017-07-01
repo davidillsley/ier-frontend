@@ -10,6 +10,8 @@ import uk.gov.gds.ier.validation.ErrorTransformForm
 import uk.gov.gds.ier.transaction.forces.InprogressForces
 import uk.gov.gds.ier.model.{HasAddressOption, LastAddress}
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 
 
 @Singleton
@@ -18,10 +20,12 @@ class AddressManualStep @Inject() (
     val config: Config,
     val encryptionService: EncryptionService,
     val remoteAssets: RemoteAssets,
-    val forces: ForcesControllers
+    val forces: ForcesControllers,
+    val Messages: Messages
 ) extends ForcesStep
   with AddressManualMustache
-  with AddressForms {
+  with AddressForms
+  with WithMessages {
 
   val validation = manualAddressForm
 

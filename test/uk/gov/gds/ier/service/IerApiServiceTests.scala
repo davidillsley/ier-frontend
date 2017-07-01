@@ -5,7 +5,6 @@ import uk.gov.gds.ier.config.Config
 import uk.gov.gds.ier.client.IerApiClient
 import uk.gov.gds.ier.model._
 import org.joda.time.DateTime
-import uk.gov.gds.ier.digest.ShaHashProvider
 import uk.gov.gds.ier.model.Success
 import uk.gov.gds.ier.model.Fail
 import uk.gov.gds.ier.service.apiservice.{EroAuthorityDetails, IerApiApplicationResponse, IerApiService, ConcreteIerApiService}
@@ -466,11 +465,10 @@ class IerApiServiceTests extends MockingTestSuite {
     val mockApiClient = mock[IerApiClient]
     val mockConfig = mock[Config]
     val mockAddressService = mock[AddressService]
-    val mockSharHashProvider = mock[ShaHashProvider]
     val mockIsoCountryService = mock[IsoCountryService]
 
     val ierApiService = new ConcreteIerApiService (mockApiClient, jsonSerialiser, mockConfig,
-        mockAddressService, mockSharHashProvider, mockIsoCountryService)
+        mockAddressService, mockIsoCountryService)
 
     when(mockApiClient.get(any[String], any[(String, String)])).thenReturn(Success(json, 0))
     val authority = ierApiService.getLocalAuthorityByGssCode("123")

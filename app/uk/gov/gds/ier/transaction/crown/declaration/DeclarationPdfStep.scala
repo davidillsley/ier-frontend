@@ -5,10 +5,12 @@ import com.google.inject.{Inject, Singleton}
 import uk.gov.gds.ier.serialiser.JsonSerialiser
 import uk.gov.gds.ier.config.Config
 import uk.gov.gds.ier.security.EncryptionService
-import uk.gov.gds.ier.step.{Routes, CrownStep}
+import uk.gov.gds.ier.step.{CrownStep, Routes}
 import uk.gov.gds.ier.transaction.crown.InprogressCrown
 import uk.gov.gds.ier.service.{DeclarationPdfDownloadService, WithDeclarationPdfDownloadService}
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 
 @Singleton
 class DeclarationPdfStep @Inject ()(
@@ -17,11 +19,13 @@ class DeclarationPdfStep @Inject ()(
     val encryptionService : EncryptionService,
     val declarationPdfDownloadService: DeclarationPdfDownloadService,
     val remoteAssets: RemoteAssets,
-    val crown: CrownControllers
+    val crown: CrownControllers,
+    val Messages: Messages
 ) extends CrownStep
   with WithDeclarationPdfDownloadService
   with DeclarationPdfForms
-  with DeclarationPdfMustache {
+  with DeclarationPdfMustache
+  with WithMessages {
 
   val validation = declarationPdfForm
 

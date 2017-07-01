@@ -62,13 +62,15 @@ abstract class MustacheTestSuite
   with WithSerialiser
   with WithMockRemoteAssets
   with MockitoHelpers
-  with WithMockConfig {
+  with WithMockConfig
+  with WithMockMessages {
   val serialiser = jsonSerialiser
 }
 
 abstract class TemplateTestSuite
   extends FlatSpec
   with WithMockConfig
+  with WithMockMessages
   with WithMockRemoteAssets
   with WithSerialiser
   with Matchers

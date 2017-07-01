@@ -18,7 +18,7 @@ abstract class SessionHandling[T <: InprogressApplication[T]]
     with WithConfig
     with WithEncryption =>
 
-  implicit class ResultWithRefreshing(result: SimpleResult) {
+  implicit class ResultWithRefreshing(result: Result) {
      def refreshToken()(implicit request: Request[_]) = {
       val token = request.getToken
       token match {

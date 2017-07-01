@@ -4,14 +4,16 @@ import com.google.inject.Inject
 import uk.gov.gds.ier.serialiser.JsonSerialiser
 import uk.gov.gds.ier.validation._
 import uk.gov.gds.ier.validation.constraints.CountryConstraints
-import uk.gov.gds.ier.model.{Country}
+import uk.gov.gds.ier.model.Country
 import uk.gov.gds.ier.config.Config
 import uk.gov.gds.ier.security.EncryptionService
-import uk.gov.gds.ier.step.{OrdinaryStep, Routes, GoTo}
+import uk.gov.gds.ier.step.{GoTo, OrdinaryStep, Routes}
 import uk.gov.gds.ier.controller.routes.ExitController
 import uk.gov.gds.ier.controller.routes.RegisterToVoteController
-import uk.gov.gds.ier.transaction.ordinary.{OrdinaryControllers, InprogressOrdinary}
+import uk.gov.gds.ier.transaction.ordinary.{InprogressOrdinary, OrdinaryControllers}
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 import uk.gov.gds.ier.service.ScotlandService
 
 class CountryStep @Inject ()(
@@ -20,11 +22,13 @@ class CountryStep @Inject ()(
     val encryptionService : EncryptionService,
     val remoteAssets: RemoteAssets,
     val ordinary: OrdinaryControllers,
-    val scotlandService: ScotlandService
+    val scotlandService: ScotlandService,
+    val Messages: Messages
 ) extends OrdinaryStep
   with CountryConstraints
   with CountryForms
-  with CountryMustache {
+  with CountryMustache
+  with WithMessages {
 
   val validation = countryForm
 

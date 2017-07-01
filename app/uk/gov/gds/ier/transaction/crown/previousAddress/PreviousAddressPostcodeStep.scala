@@ -9,6 +9,8 @@ import uk.gov.gds.ier.service.AddressService
 import uk.gov.gds.ier.step.{CrownStep, Routes}
 import uk.gov.gds.ier.transaction.crown.InprogressCrown
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 
 @Singleton
 class PreviousAddressPostcodeStep @Inject() (
@@ -17,10 +19,12 @@ class PreviousAddressPostcodeStep @Inject() (
     val encryptionService: EncryptionService,
     val remoteAssets: RemoteAssets,
     val addressService: AddressService,
-    val crown: CrownControllers
+    val crown: CrownControllers,
+    val Messages: Messages
 ) extends CrownStep
   with PreviousAddressPostcodeMustache
-  with PreviousAddressForms {
+  with PreviousAddressForms
+  with WithMessages {
 
   val validation = postcodeStepForm
 

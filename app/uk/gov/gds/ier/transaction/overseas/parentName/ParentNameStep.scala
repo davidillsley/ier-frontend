@@ -9,6 +9,8 @@ import uk.gov.gds.ier.step.{OverseaStep, Routes}
 import uk.gov.gds.ier.model.{OverseasParentName, PreviousName}
 import uk.gov.gds.ier.transaction.overseas.InprogressOverseas
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 
 @Singleton
 class ParentNameStep @Inject ()(
@@ -16,10 +18,12 @@ class ParentNameStep @Inject ()(
     val config: Config,
     val encryptionService : EncryptionService,
     val remoteAssets: RemoteAssets,
-    val overseas: OverseasControllers
+    val overseas: OverseasControllers,
+    val Messages: Messages
 ) extends OverseaStep
   with ParentNameForms
-  with ParentNameMustache {
+  with ParentNameMustache
+  with WithMessages {
 
   val validation = parentNameForm
 

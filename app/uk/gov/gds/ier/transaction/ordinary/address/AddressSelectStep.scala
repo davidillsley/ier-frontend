@@ -2,17 +2,17 @@ package uk.gov.gds.ier.transaction.ordinary.address
 
 import com.google.inject.{Inject, Singleton}
 import uk.gov.gds.ier.config.Config
-import uk.gov.gds.ier.model.{
-  Addresses,
-  PossibleAddress}
+import uk.gov.gds.ier.model.{Addresses, PossibleAddress}
 import uk.gov.gds.ier.security.EncryptionService
 import uk.gov.gds.ier.serialiser.JsonSerialiser
-import uk.gov.gds.ier.service.{ScotlandService, AddressService}
+import uk.gov.gds.ier.service.{AddressService, ScotlandService}
 import uk.gov.gds.ier.step.{GoTo, OrdinaryStep, Routes}
 import uk.gov.gds.ier.validation.ErrorTransformForm
-import uk.gov.gds.ier.transaction.ordinary.{OrdinaryControllers, InprogressOrdinary}
+import uk.gov.gds.ier.transaction.ordinary.{InprogressOrdinary, OrdinaryControllers}
 import uk.gov.gds.ier.controller.routes.ExitController
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 
 @Singleton
 class AddressSelectStep @Inject() (
@@ -22,10 +22,12 @@ class AddressSelectStep @Inject() (
     val addressService: AddressService,
     val scotlandService: ScotlandService,
     val remoteAssets: RemoteAssets,
-    val ordinary: OrdinaryControllers
+    val ordinary: OrdinaryControllers,
+    val Messages: Messages
 ) extends OrdinaryStep
   with AddressSelectMustache
-  with AddressForms {
+  with AddressForms
+  with WithMessages {
 
   val validation = addressForm
 

@@ -8,8 +8,10 @@ import uk.gov.gds.ier.security.EncryptionService
 import uk.gov.gds.ier.step.{OrdinaryStep, Routes}
 import uk.gov.gds.ier.transaction.ordinary.InprogressOrdinary
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 import uk.gov.gds.ier.transaction.ordinary.OrdinaryControllers
-import uk.gov.gds.ier.service.{ScotlandService, AddressService}
+import uk.gov.gds.ier.service.{AddressService, ScotlandService}
 
 @Singleton
 class NameStep @Inject ()(
@@ -19,10 +21,12 @@ class NameStep @Inject ()(
     val remoteAssets: RemoteAssets,
     val ordinary: OrdinaryControllers,
     val addressService: AddressService,
-    val scotlandService: ScotlandService)
+    val scotlandService: ScotlandService,
+    val Messages: Messages)
   extends OrdinaryStep
   with NameForms
-  with NameMustache {
+  with NameMustache
+    with WithMessages {
 
   val validation = nameForm
 

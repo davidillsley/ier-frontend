@@ -12,6 +12,8 @@ import uk.gov.gds.ier.validation.ErrorTransformForm
 import uk.gov.gds.ier.transaction.crown.InprogressCrown
 import uk.gov.gds.ier.service.AddressService
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 
 @Singleton
 class PreviousAddressManualStep @Inject() (
@@ -20,10 +22,12 @@ class PreviousAddressManualStep @Inject() (
     val addressService: AddressService,
     val remoteAssets: RemoteAssets,
     val encryptionService: EncryptionService,
-    val crown: CrownControllers
+    val crown: CrownControllers,
+    val Messages: Messages
 ) extends CrownStep
   with PreviousAddressManualMustache
-  with PreviousAddressForms {
+  with PreviousAddressForms
+  with WithMessages {
 
   val validation = manualStepForm
 

@@ -2,11 +2,12 @@ package uk.gov.gds.ier.transaction.complete
 
 import play.api.mvc._
 import com.google.inject.Inject
-import uk.gov.gds.ier.serialiser.{WithSerialiser, JsonSerialiser}
-import uk.gov.gds.ier.guice.{WithRemoteAssets, WithEncryption, WithConfig}
+import uk.gov.gds.ier.serialiser.{JsonSerialiser, WithSerialiser}
+import uk.gov.gds.ier.guice.{WithConfig, WithEncryption, WithMessages, WithRemoteAssets}
 import uk.gov.gds.ier.config.Config
 import uk.gov.gds.ier.security.EncryptionService
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.langs.Messages
 import uk.gov.gds.ier.logging.Logging
 import uk.gov.gds.ier.session.{RequestHandling, ResultHandling}
 
@@ -14,7 +15,8 @@ class CompleteStep @Inject() (
     val serialiser: JsonSerialiser,
     val config: Config,
     val encryptionService: EncryptionService,
-    val remoteAssets: RemoteAssets
+    val remoteAssets: RemoteAssets,
+    val Messages: Messages
   ) extends Controller
   with ResultHandling
   with RequestHandling
@@ -23,7 +25,8 @@ class CompleteStep @Inject() (
   with WithEncryption
   with WithRemoteAssets
   with Logging
-  with CompleteMustache {
+  with CompleteMustache
+  with WithMessages {
 
   def overseasComplete = complete
 

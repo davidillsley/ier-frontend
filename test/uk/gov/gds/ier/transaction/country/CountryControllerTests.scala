@@ -1,5 +1,6 @@
 package uk.gov.gds.ier.transaction.country
 
+import play.Configuration
 import uk.gov.gds.ier.test.ControllerTestSuite
 import uk.gov.gds.ier.DynamicGlobal
 import uk.gov.gds.ier.config.Config
@@ -7,15 +8,15 @@ import uk.gov.gds.ier.config.Config
 class CountryControllerTests extends ControllerTestSuite {
 
   private def createGlobalConfigWith(availableForScotlandFlag: Boolean) = {
-    val mockConfig = new Config {
+    val mockConfig = new Config(Configuration.root()) {
       override def availableForScotland = availableForScotlandFlag
     }
-
-    Some(new DynamicGlobal {
-      override def bindings = { binder =>
-        binder bind classOf[uk.gov.gds.ier.config.Config] toInstance mockConfig
-      }
-    })
+//
+//    Some(new DynamicGlobal {
+//      override def bindings = { binder =>
+//        binder bind classOf[uk.gov.gds.ier.config.Config] toInstance mockConfig
+//      }
+//    })
   }
 
   behavior of "CountryController.get"
@@ -86,7 +87,7 @@ class CountryControllerTests extends ControllerTestSuite {
 
   def appWhichBindsToScotlandWith(availableForScotlandFlag: Boolean, andRedirectsToUrl:String) {
     it should s"bind successfully on Scotland and redirect to $andRedirectsToUrl with availableForScotland flag: $availableForScotlandFlag" in {
-      running(FakeApplication(withGlobal = createGlobalConfigWith(availableForScotlandFlag = availableForScotlandFlag))) {
+      running(FakeApplication(Map("ier.availableForScotland" -> "true"))) {
         val Some(result) = route(
           FakeRequest(POST, "/register-to-vote/country-of-residence")
             .withIerSession()
@@ -103,7 +104,7 @@ class CountryControllerTests extends ControllerTestSuite {
 
   def overseasAppWhichBindsToScotlandWith(availableForScotlandFlag: Boolean, andRedirectsToUrl:String) {
     it should s"bind successfully on Abroad + Scotland and redirect to $andRedirectsToUrl with availableForScotland flag: $availableForScotlandFlag" in {
-      running(FakeApplication(withGlobal = createGlobalConfigWith(availableForScotlandFlag = availableForScotlandFlag))) {
+      running(FakeApplication(Map("ier.availableForScotland" -> "true"))) {
         val Some(result) = route(
           FakeRequest(POST, "/register-to-vote/country-of-residence")
             .withIerSession()
@@ -360,7 +361,7 @@ class CountryControllerTests extends ControllerTestSuite {
 
   def editedAppWhichBindsToScotlandWith(availableForScotlandFlag: Boolean, andRedirectsToUrl:String) {
     it should s"bind successfully on Scotland and redirect to $andRedirectsToUrl with availableForScotland flag: $availableForScotlandFlag" in {
-      running(FakeApplication(withGlobal = createGlobalConfigWith(availableForScotlandFlag = availableForScotlandFlag))) {
+      running(FakeApplication(Map("ier.availableForScotland" -> "true"))) {
         val Some(result) = route(
           FakeRequest(POST, "/register-to-vote/edit/country-of-residence")
             .withIerSession()
@@ -377,7 +378,7 @@ class CountryControllerTests extends ControllerTestSuite {
 
   def editedOverseasAppWhichBindsToScotlandWith(availableForScotlandFlag: Boolean, andRedirectsToUrl:String) {
     it should s"bind successfully on Abroad + Scotland and redirect to $andRedirectsToUrl with availableForScotland flag: $availableForScotlandFlag" in {
-      running(FakeApplication(withGlobal = createGlobalConfigWith(availableForScotlandFlag = availableForScotlandFlag))) {
+      running(FakeApplication(Map("ier.availableForScotland" -> "true"))) {
         val Some(result) = route(
           FakeRequest(POST, "/register-to-vote/edit/country-of-residence")
             .withIerSession()

@@ -2,7 +2,6 @@ package uk.gov.gds.ier.mustache
 
 import uk.gov.gds.ier.controller.routes.RegisterToVoteController
 import uk.gov.gds.ier.guice.{WithRemoteAssets, WithConfig}
-import play.api.templates.Html
 
 trait GovukMustache extends InheritedGovukMustache {
   self: WithRemoteAssets

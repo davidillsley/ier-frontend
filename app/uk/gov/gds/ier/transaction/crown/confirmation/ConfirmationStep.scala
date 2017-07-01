@@ -1,6 +1,6 @@
 package uk.gov.gds.ier.transaction.crown.confirmation
 
-import uk.gov.gds.ier.langs.Language
+import uk.gov.gds.ier.langs.{Language, Messages}
 import uk.gov.gds.ier.step.ConfirmationStepController
 import uk.gov.gds.ier.security.EncryptionService
 import uk.gov.gds.ier.serialiser.JsonSerialiser
@@ -9,10 +9,10 @@ import com.google.inject.{Inject, Singleton}
 import uk.gov.gds.ier.service.apiservice.IerApiService
 import uk.gov.gds.ier.service.AddressService
 import uk.gov.gds.ier.assets.RemoteAssets
-import uk.gov.gds.ier.guice.WithRemoteAssets
+import uk.gov.gds.ier.guice.{WithMessages, WithRemoteAssets}
 import uk.gov.gds.ier.step.Routes
-import uk.gov.gds.ier.transaction.crown.{InprogressCrown, CrownControllers, WithCrownControllers}
-import uk.gov.gds.ier.model.{PostalVoteOption, WaysToVoteType, ApplicationType}
+import uk.gov.gds.ier.transaction.crown.{CrownControllers, InprogressCrown, WithCrownControllers}
+import uk.gov.gds.ier.model.{ApplicationType, PostalVoteOption, WaysToVoteType}
 import uk.gov.gds.ier.transaction.complete.CompleteCookie
 import uk.gov.gds.ier.session.ResultHandling
 import uk.gov.gds.ier.transaction.complete.routes.CompleteStep
@@ -26,13 +26,15 @@ class ConfirmationStep @Inject() (
     val addressService: AddressService,
     val remoteAssets: RemoteAssets,
     ierApi: IerApiService,
-    val crown: CrownControllers
+    val crown: CrownControllers,
+    val Messages: Messages
 ) extends ConfirmationStepController[InprogressCrown]
   with ConfirmationForms
   with ConfirmationMustache
   with ResultHandling
   with WithCrownControllers
-  with WithRemoteAssets {
+  with WithRemoteAssets
+  with WithMessages {
 
   def factoryOfT() = InprogressCrown()
   def timeoutPage() = ErrorController.crownTimeout

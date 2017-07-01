@@ -3,13 +3,15 @@ package uk.gov.gds.ier.transaction.crown.address
 import uk.gov.gds.ier.transaction.crown.CrownControllers
 import com.google.inject.{Inject, Singleton}
 import uk.gov.gds.ier.config.Config
-import uk.gov.gds.ier.model.{LastAddress, HasAddressOption}
+import uk.gov.gds.ier.model.{HasAddressOption, LastAddress}
 import uk.gov.gds.ier.security.EncryptionService
 import uk.gov.gds.ier.serialiser.JsonSerialiser
 import uk.gov.gds.ier.step.{CrownStep, Routes}
 import uk.gov.gds.ier.validation.ErrorTransformForm
 import uk.gov.gds.ier.transaction.crown.InprogressCrown
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 
 @Singleton
 class AddressManualStep @Inject() (
@@ -17,10 +19,12 @@ class AddressManualStep @Inject() (
     val config: Config,
     val encryptionService: EncryptionService,
     val remoteAssets: RemoteAssets,
-    val crown: CrownControllers
+    val crown: CrownControllers,
+    val Messages: Messages
 ) extends CrownStep
   with AddressManualMustache
-  with AddressForms {
+  with AddressForms
+  with WithMessages {
 
   val validation = manualAddressForm
 

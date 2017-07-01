@@ -6,12 +6,14 @@ import uk.gov.gds.ier.serialiser.JsonSerialiser
 import uk.gov.gds.ier.config.Config
 import uk.gov.gds.ier.security.EncryptionService
 import uk.gov.gds.ier.step.{ForcesStep, Routes, Step}
-import uk.gov.gds.ier.model.{WaysToVoteType}
+import uk.gov.gds.ier.model.WaysToVoteType
 import uk.gov.gds.ier.validation.ErrorTransformForm
-import play.api.mvc.SimpleResult
-import uk.gov.gds.ier.model.{WaysToVote,PostalOrProxyVote}
+import play.api.mvc.Result
+import uk.gov.gds.ier.model.{PostalOrProxyVote, WaysToVote}
 import uk.gov.gds.ier.transaction.forces.InprogressForces
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 
 
 @Singleton
@@ -20,10 +22,12 @@ class WaysToVoteStep @Inject ()(
     val config: Config,
     val encryptionService : EncryptionService,
     val remoteAssets: RemoteAssets,
-    val forces: ForcesControllers
+    val forces: ForcesControllers,
+    val Messages: Messages
 ) extends ForcesStep
   with WaysToVoteForms
-  with WaysToVoteMustache {
+  with WaysToVoteMustache
+  with WithMessages {
 
   val validation = waysToVoteForm
 

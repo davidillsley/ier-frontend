@@ -3,12 +3,13 @@ package uk.gov.gds.ier.transaction.overseas.nino
 import uk.gov.gds.ier.transaction.overseas.OverseasControllers
 import com.google.inject.{Inject, Singleton}
 import uk.gov.gds.ier.serialiser.JsonSerialiser
-
 import uk.gov.gds.ier.config.Config
 import uk.gov.gds.ier.security.EncryptionService
 import uk.gov.gds.ier.step.{OverseaStep, Routes}
 import uk.gov.gds.ier.transaction.overseas.InprogressOverseas
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 
 @Singleton
 class NinoStep @Inject ()(
@@ -16,10 +17,12 @@ class NinoStep @Inject ()(
     val config: Config,
     val encryptionService : EncryptionService,
     val remoteAssets: RemoteAssets,
-    val overseas: OverseasControllers
+    val overseas: OverseasControllers,
+    val Messages: Messages
 ) extends OverseaStep
   with NinoForms
-  with NinoMustache {
+  with NinoMustache
+  with WithMessages {
 
   val validation = ninoForm
 

@@ -6,9 +6,11 @@ import uk.gov.gds.ier.serialiser.JsonSerialiser
 import uk.gov.gds.ier.config.Config
 import uk.gov.gds.ier.security.EncryptionService
 import uk.gov.gds.ier.service.AddressService
-import uk.gov.gds.ier.step.{Routes, CrownStep}
+import uk.gov.gds.ier.step.{CrownStep, Routes}
 import uk.gov.gds.ier.transaction.crown.InprogressCrown
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 
 @Singleton
 class AddressFirstStep @Inject ()(
@@ -17,10 +19,12 @@ class AddressFirstStep @Inject ()(
     val encryptionService : EncryptionService,
     val addressService: AddressService,
     val remoteAssets: RemoteAssets,
-    val crown: CrownControllers
+    val crown: CrownControllers,
+    val Messages: Messages
 ) extends CrownStep
   with AddressFirstMustache
-  with AddressFirstForms {
+  with AddressFirstForms
+  with WithMessages {
 
   val validation = addressFirstForm
 

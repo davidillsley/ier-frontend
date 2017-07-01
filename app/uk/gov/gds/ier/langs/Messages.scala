@@ -1,34 +1,30 @@
 package uk.gov.gds.ier.langs
 
-import play.api.i18n.Lang
-import jsmessages.api.JsMessages
+import javax.inject.Inject
+
+import play.api.i18n.{Lang, MessagesApi}
+import jsmessages.JsMessagesFactory
 import uk.gov.gds.ier.validation.ErrorTransformForm
 
-object Messages {
-  import play.api.Play.current
+class Messages @Inject() (jsMessagesFactory: JsMessagesFactory,  messagesApi: MessagesApi) {
 
   private val playErrorPrefix = "error."
-  private lazy val messages = play.api.i18n.Messages.messages
-
-  def messagesForLang(lang:Lang) = {
-    messages.filterKeys(_ == lang.language).headOption.map(_._2).getOrElse(Map.empty)
-  }
 
   def translatedGlobalErrors[T](
       form: ErrorTransformForm[T]
   )(implicit lang:Lang): Seq[String] = {
     form.globalErrors.map { error =>
-      play.api.i18n.Messages(error.message)
+      messagesApi.apply(error.message)(lang)
     }
   }
 
   def apply(key: String)(implicit lang: Lang): String = {
-    play.api.i18n.Messages(key)
+    messagesApi.apply(key)(lang)
   }
 
   def apply(key: String, args: Any*)(implicit lang: Lang): String = {
-    play.api.i18n.Messages(key, args: _*)
+    messagesApi.apply(key, args: _*)(lang)
   }
 
-  lazy val jsMessages = JsMessages.filtering(!_.startsWith(playErrorPrefix))
+  lazy val jsMessages = jsMessagesFactory.filtering(!_.startsWith(playErrorPrefix))
 }

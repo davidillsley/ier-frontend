@@ -18,9 +18,9 @@ case class Question (
 
 trait MustacheData {
   val question: Question
-  lazy val messages: Map[String,String] = {
-    Messages.messagesForLang(question.lang)
-  }
+//  lazy val messages: Map[String,String] = {
+//    Messages.messagesForLang(question.lang)
+//  }
 }
 
 trait MustacheTemplate[T] {

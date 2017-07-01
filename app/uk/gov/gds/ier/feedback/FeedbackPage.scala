@@ -5,21 +5,24 @@ import uk.gov.gds.ier.config.Config
 import uk.gov.gds.ier.assets.RemoteAssets
 import uk.gov.gds.ier.logging.Logging
 import play.api.mvc._
-import uk.gov.gds.ier.guice.{WithRemoteAssets, WithConfig}
+import uk.gov.gds.ier.guice.{WithConfig, WithMessages, WithRemoteAssets}
 import uk.gov.gds.ier.session.CacheBust
 import com.google.inject.Singleton
+import uk.gov.gds.ier.langs.Messages
 
 @Singleton
 class FeedbackPage @Inject ()(
     val config: Config,
     val remoteAssets: RemoteAssets,
-    val feedbackService: FeedbackService)
+    val feedbackService: FeedbackService,
+    val Messages: Messages)
   extends Controller
   with FeedbackForm
   with FeedbackMustache
   with Logging
   with WithConfig
-  with WithRemoteAssets {
+  with WithRemoteAssets
+  with WithMessages {
 
   def get(sourcePath: Option[String]) = CacheBust {
     Action { implicit request =>

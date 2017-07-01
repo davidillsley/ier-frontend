@@ -7,9 +7,11 @@ import uk.gov.gds.ier.validation._
 import uk.gov.gds.ier.service.IsoCountryService
 import uk.gov.gds.ier.config.Config
 import uk.gov.gds.ier.security.EncryptionService
-import uk.gov.gds.ier.step.{OrdinaryStep, Routes, GoTo}
-import uk.gov.gds.ier.transaction.ordinary.{OrdinaryControllers, InprogressOrdinary}
+import uk.gov.gds.ier.step.{GoTo, OrdinaryStep, Routes}
+import uk.gov.gds.ier.transaction.ordinary.{InprogressOrdinary, OrdinaryControllers}
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 
 @Singleton
 class NationalityStep @Inject ()(
@@ -18,10 +20,12 @@ class NationalityStep @Inject ()(
     val config: Config,
     val encryptionService : EncryptionService,
     val remoteAssets: RemoteAssets,
-    val ordinary: OrdinaryControllers
+    val ordinary: OrdinaryControllers,
+    val Messages: Messages
 ) extends OrdinaryStep
   with NationalityForms
-  with NationalityMustache {
+  with NationalityMustache
+  with WithMessages {
 
   val validation = nationalityForm
 

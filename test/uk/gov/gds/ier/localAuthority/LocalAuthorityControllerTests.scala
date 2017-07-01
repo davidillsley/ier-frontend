@@ -1,5 +1,6 @@
 package uk.gov.gds.ier.localAuthority
 
+import play.Configuration
 import uk.gov.gds.ier.test.MockingControllerTestSuite
 import uk.gov.gds.ier.service.{AddressService, ScotlandService}
 import uk.gov.gds.ier.model.PartialAddress
@@ -23,14 +24,14 @@ import uk.gov.gds.ier.client.IerApiClient
 
 class LocalAuthorityControllerTests extends MockingControllerTestSuite {
 
-  val stubConfig = new Config {
+  val stubConfig = new Config(Configuration.root()) {
     override def locateUrl = "http://locateurl"
     override def locateAuthorityUrl = "http://localAuthorityUrl"
     override def locateApiAuthorizationToken = "token"
     override def apiTimeout = 10
   }
 
-  val mockApiClient = new LocateApiClient(stubConfig) {
+  val mockApiClient = new LocateApiClient(stubConfig, FakeApplication()) {
     override def get(url: String, headers: (String, String)*) : ApiResponse = {
       val json = """
       {
@@ -49,13 +50,13 @@ class LocalAuthorityControllerTests extends MockingControllerTestSuite {
       Success(json, 0)
     }
   }
-
-  val stubGlobal = new DynamicGlobal {
-    override def bindings = { binder =>
-      binder bind classOf[Config] toInstance stubConfig
-      binder bind classOf[LocateApiClient] toInstance mockApiClient
-    }
-  }
+//
+//  val stubGlobal = new DynamicGlobal {
+//    override def bindings = { binder =>
+//      binder bind classOf[Config] toInstance stubConfig
+//      binder bind classOf[LocateApiClient] toInstance mockApiClient
+//    }
+//  }
 
   /*behavior of "LocalAuthorityController.showLookup"
   it should "display the lookup page" in {

@@ -73,7 +73,7 @@ case class ErrorTransformForm[T](private val form:Form[T]) {
   def get : T = {
     form.get
   }
-  def errorsAsJson(implicit lang : Lang) : JsValue = {
+  def errorsAsJson(implicit messages: play.api.i18n.Messages) : JsValue = {
     transformedForm.errorsAsJson
   }
   def withError(error : FormError) : ErrorTransformForm[T] = {

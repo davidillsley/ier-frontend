@@ -10,6 +10,8 @@ import uk.gov.gds.ier.step.{CrownStep, Routes}
 import uk.gov.gds.ier.validation.ErrorTransformForm
 import uk.gov.gds.ier.transaction.crown.InprogressCrown
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 
 @Singleton
 class ContactStep @Inject ()(
@@ -17,10 +19,12 @@ class ContactStep @Inject ()(
     val config: Config,
     val encryptionService : EncryptionService,
     val remoteAssets: RemoteAssets,
-    val crown: CrownControllers
+    val crown: CrownControllers,
+    val Messages: Messages
 ) extends CrownStep
   with ContactForms
-  with ContactMustache {
+  with ContactMustache
+  with WithMessages {
 
   val validation = contactForm
 

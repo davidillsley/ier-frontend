@@ -4,14 +4,15 @@ import org.joda.time.{DateTime, LocalDate}
 import play.api.libs.json._
 import uk.gov.gds.ier.serialiser.WithSerialiser
 import uk.gov.gds.ier.validation.IerForms
-import uk.gov.gds.ier.test.{WithMockScotlandService, UnitTestSuite, WithMockAddressService}
+import uk.gov.gds.ier.test.{UnitTestSuite, WithMockAddressService, WithMockMessages, WithMockScotlandService}
 
 class IerFormsTests extends UnitTestSuite {
 
   val forms = new IerForms
     with WithMockAddressService
     with WithMockScotlandService
-    with WithSerialiser {
+    with WithSerialiser
+    with WithMockMessages {
     val serialiser = jsonSerialiser
   }
 

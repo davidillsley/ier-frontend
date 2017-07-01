@@ -9,7 +9,7 @@ class FeedbackServiceTests extends MockingTestSuite {
   val serialiser = jsonSerialiser
   val config = mock[Config]
 
-  val feedbackClient = new FeedbackClientImpl(serialiser, config) {
+  val feedbackClient = new FeedbackClientImpl(serialiser, config, FakeApplication()) {
     override def postAsync(
         url: String,
         content: String,

@@ -6,7 +6,6 @@ import uk.gov.gds.ier.logging.Logging
 import uk.gov.gds.ier.serialiser.WithSerialiser
 import uk.gov.gds.ier.guice.{WithEncryption, WithConfig}
 import uk.gov.gds.ier.validation.ErrorTransformForm
-import play.api.templates.Html
 import uk.gov.gds.ier.session.SessionHandling
 
 trait ConfirmationStepController[T <: InprogressApplication[T]]

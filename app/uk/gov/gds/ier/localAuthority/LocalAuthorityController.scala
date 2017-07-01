@@ -4,10 +4,10 @@ import com.google.inject.Inject
 import play.api.mvc.Controller
 import play.api.mvc.Action
 import uk.gov.gds.ier.client.ApiResults
-import uk.gov.gds.ier.serialiser.{ JsonSerialiser, WithSerialiser }
+import uk.gov.gds.ier.serialiser.{JsonSerialiser, WithSerialiser}
 import uk.gov.gds.ier.validation.IerForms
 import uk.gov.gds.ier.session.RequestHandling
-import uk.gov.gds.ier.guice.WithEncryption
+import uk.gov.gds.ier.guice.{WithConfig, WithEncryption, WithMessages, WithRemoteAssets}
 import uk.gov.gds.ier.security.EncryptionService
 import uk.gov.gds.ier.service.apiservice.ConcreteIerApiService
 import uk.gov.gds.ier.transaction.ordinary.InprogressOrdinary
@@ -16,14 +16,13 @@ import uk.gov.gds.ier.transaction.crown.InprogressCrown
 import uk.gov.gds.ier.transaction.overseas.InprogressOverseas
 import uk.gov.gds.ier.validation.FormKeys
 import uk.gov.gds.ier.logging.Logging
-import uk.gov.gds.ier.service.{ScotlandService, AddressService}
-import uk.gov.gds.ier.guice.WithRemoteAssets
-import uk.gov.gds.ier.guice.WithConfig
+import uk.gov.gds.ier.service.{AddressService, ScotlandService}
 import uk.gov.gds.ier.config.Config
 import uk.gov.gds.ier.assets.RemoteAssets
 import play.api.mvc.Request
 import play.api.mvc.AnyContent
 import com.google.inject.Singleton
+import uk.gov.gds.ier.langs.Messages
 
 @Singleton
 class LocalAuthorityController @Inject() (
@@ -33,7 +32,8 @@ class LocalAuthorityController @Inject() (
     val encryptionService: EncryptionService,
     val config: Config,
     val remoteAssets: RemoteAssets,
-    val scotlandService: ScotlandService
+    val scotlandService: ScotlandService,
+    val Messages: Messages
 ) extends Controller
   with ApiResults
   with WithSerialiser
@@ -45,7 +45,8 @@ class LocalAuthorityController @Inject() (
   with IerForms
   with LocalAuthorityMustache
   with WithRemoteAssets
-  with WithConfig {
+  with WithConfig
+  with WithMessages {
 
   def ero(gssCode: String, sourcePath: Option[String]) = Action { implicit request =>
     val localAuthorityContactDetails = ierApiService.getLocalAuthorityByGssCode(gssCode).contactDetails

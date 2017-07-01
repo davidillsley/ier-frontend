@@ -9,6 +9,8 @@ import uk.gov.gds.ier.step.{GoTo, OrdinaryStep, Routes}
 import uk.gov.gds.ier.transaction.ordinary.InprogressOrdinary
 import uk.gov.gds.ier.controller.routes.ExitController
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 import uk.gov.gds.ier.transaction.ordinary.OrdinaryControllers
 import uk.gov.gds.ier.validation.DateValidator
 import views.html.helper.form
@@ -20,10 +22,12 @@ class AddressStep @Inject() (
     val encryptionService: EncryptionService,
     val addressService: AddressService,
     val remoteAssets: RemoteAssets,
-    val ordinary: OrdinaryControllers
+    val ordinary: OrdinaryControllers,
+    val Messages: Messages
 ) extends OrdinaryStep
   with AddressMustache
-  with AddressForms {
+  with AddressForms
+  with WithMessages {
 
   val validation = lookupAddressForm
 

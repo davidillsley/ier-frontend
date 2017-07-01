@@ -9,6 +9,8 @@ import uk.gov.gds.ier.security.EncryptionService
 import uk.gov.gds.ier.step.{CrownStep, Routes}
 import uk.gov.gds.ier.transaction.crown.InprogressCrown
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 
 @Singleton
 class NinoStep @Inject ()(
@@ -16,10 +18,12 @@ class NinoStep @Inject ()(
     val config: Config,
     val encryptionService : EncryptionService,
     val remoteAssets: RemoteAssets,
-    val crown: CrownControllers
+    val crown: CrownControllers,
+    val Messages: Messages
 ) extends CrownStep
   with NinoForms
-  with NinoMustache {
+  with NinoMustache
+  with WithMessages {
 
   val validation = ninoForm
 

@@ -1,12 +1,13 @@
 package uk.gov.gds.ier.service
 
-import org.scalatest.{Matchers, FlatSpec}
+import org.scalatest.{FlatSpec, Matchers}
 import uk.gov.gds.ier.client.IerApiClient
 import org.scalatest.mock.MockitoSugar
 import org.mockito.Mockito._
-import uk.gov.gds.ier.model.{ApiResponse, Success, Fail}
+import uk.gov.gds.ier.model.{ApiResponse, Fail, Success}
 import uk.gov.gds.ier.controller.MockConfig
-import play.api.libs.ws.Response
+import play.api.libs.ws.WSResponse
+import play.api.test.FakeApplication
 
 class IerApiClientTests
   extends FlatSpec
@@ -32,11 +33,11 @@ class IerApiClientTests
 
 class FakeApiClient(returnStatusCode: Int,
                     returnBody: String = "test body")
-  extends IerApiClient(new MockConfig)
+  extends IerApiClient(new MockConfig, FakeApplication())
   with MockitoSugar {
 
-  override def awaitResultFor(block: => Response): Response = {
-    val mockedResponse = mock[Response]
+  override def awaitResultFor(block: => WSResponse): WSResponse = {
+    val mockedResponse = mock[WSResponse]
     when(mockedResponse.status).thenReturn(returnStatusCode)
     when(mockedResponse.body).thenReturn(returnBody)
     mockedResponse

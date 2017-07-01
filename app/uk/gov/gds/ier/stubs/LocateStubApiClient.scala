@@ -3,16 +3,17 @@ package uk.gov.gds.ier.stubs
 
 import com.google.inject.{Inject, Singleton}
 import uk.gov.gds.ier.config.Config
-import uk.gov.gds.ier.model.{Fail, Success, ApiResponse}
-import java.util.UUID
-import org.joda.time.DateTime
+import uk.gov.gds.ier.model.{Success, ApiResponse}
+import play.api.Application
+
 import uk.gov.gds.ier.serialiser.JsonSerialiser
 import uk.gov.gds.ier.client.LocateApiClient
 
 @Singleton
 class LocateStubApiClient @Inject() (
-    config: Config,
-    serialiser: JsonSerialiser) extends LocateApiClient(config) {
+                                      config: Config,
+                                      application: Application,
+                                      serialiser: JsonSerialiser) extends LocateApiClient(config, application) {
 
   override def get(url: String, headers: (String, String)*) : ApiResponse = {
       Success("""[

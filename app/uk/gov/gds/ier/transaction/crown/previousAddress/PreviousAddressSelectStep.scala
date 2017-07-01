@@ -15,6 +15,8 @@ import uk.gov.gds.ier.model.PartialPreviousAddress
 import uk.gov.gds.ier.model.MovedHouseOption
 import uk.gov.gds.ier.transaction.crown.InprogressCrown
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 
 @Singleton
 class PreviousAddressSelectStep @Inject() (
@@ -23,11 +25,13 @@ class PreviousAddressSelectStep @Inject() (
     val encryptionService: EncryptionService,
     val addressService: AddressService,
     val remoteAssets: RemoteAssets,
-    val crown: CrownControllers
+    val crown: CrownControllers,
+    val Messages: Messages
 ) extends CrownStep
   with PreviousAddressSelectMustache
   with PreviousAddressForms
-  with WithAddressService {
+  with WithAddressService
+  with WithMessages {
 
   val validation = selectStepForm
 

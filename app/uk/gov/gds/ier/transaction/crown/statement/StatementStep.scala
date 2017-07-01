@@ -9,6 +9,8 @@ import uk.gov.gds.ier.serialiser.JsonSerialiser
 import uk.gov.gds.ier.validation.ErrorTransformForm
 import uk.gov.gds.ier.transaction.crown.InprogressCrown
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 
 @Singleton
 class StatementStep @Inject ()(
@@ -16,10 +18,12 @@ class StatementStep @Inject ()(
     val config: Config,
     val encryptionService: EncryptionService,
     val remoteAssets: RemoteAssets,
-    val crown: CrownControllers
+    val crown: CrownControllers,
+    val Messages: Messages
 ) extends CrownStep
     with StatementForms
-    with StatementMustache {
+    with StatementMustache
+  with WithMessages {
 
   val validation = statementForm
 

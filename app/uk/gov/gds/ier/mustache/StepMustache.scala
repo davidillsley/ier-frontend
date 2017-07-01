@@ -1,9 +1,9 @@
 package uk.gov.gds.ier.mustache
 
-import play.api.templates.Html
+import play.twirl.api.Html
 import uk.gov.gds.ier.guice.{WithRemoteAssets, WithConfig}
 import play.api.http.{ContentTypeOf, MimeTypes}
-import play.api.mvc.Content
+import play.twirl.api.Content
 import uk.gov.gds.ier.langs.Language
 import play.api.mvc.Request
 
@@ -33,4 +33,3 @@ trait StepMustache extends MustacheModel {
     def contentType: String = MimeTypes.HTML
   }
 }
-

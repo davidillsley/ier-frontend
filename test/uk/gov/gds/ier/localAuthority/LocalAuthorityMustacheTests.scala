@@ -1,8 +1,6 @@
 package uk.gov.gds.ier.localAuthority
 
-import uk.gov.gds.ier.test.{MustacheTestSuite, MockitoHelpers}
-import uk.gov.gds.ier.test.WithMockConfig
-import uk.gov.gds.ier.test.WithMockRemoteAssets
+import uk.gov.gds.ier.test._
 import uk.gov.gds.ier.model.LocalAuthorityContactDetails
 import org.jsoup.Jsoup
 import play.api.mvc.Call
@@ -11,7 +9,8 @@ class LocalAuthorityMustacheTests extends MustacheTestSuite with MockitoHelpers 
 
   val mustaches = new LocalAuthorityMustache
     with WithMockConfig
-    with WithMockRemoteAssets {}
+    with WithMockRemoteAssets
+    with WithMockMessages {}
 
   behavior of "LocalAutorityPage"
   it should "render Local Authority information" in runningApp {

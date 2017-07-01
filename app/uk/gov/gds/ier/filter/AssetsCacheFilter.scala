@@ -1,15 +1,18 @@
 package uk.gov.gds.ier.filter
 
+import javax.inject.Inject
+
+import akka.stream.Materializer
 import play.api.mvc._
-import scala.concurrent.Future
-import play.api.libs.concurrent.Execution.Implicits.defaultContext
+
+import scala.concurrent.{ExecutionContext, Future}
 import uk.gov.gds.ier.logging.Logging
 import uk.gov.gds.ier.assets.RemoteAssets
-import com.google.inject.Inject
 
-class AssetsCacheFilter @Inject()(remoteAssets: RemoteAssets) extends Filter with Logging {
-  def apply(nextFilter: (RequestHeader) => Future[SimpleResult])
-           (requestHeader: RequestHeader): Future[SimpleResult] = {
+class AssetsCacheFilter @Inject() (implicit val mat: Materializer, ec: ExecutionContext, remoteAssets: RemoteAssets) extends Filter with Logging {
+
+  def apply(nextFilter: (RequestHeader) => Future[Result])
+           (requestHeader: RequestHeader): Future[Result] = {
     nextFilter(requestHeader).map { result =>
       if(remoteAssets.shouldSetNoCache(requestHeader)){
         logger.error(s"request with unrecognised sha: ${requestHeader.method} ${requestHeader.path}")

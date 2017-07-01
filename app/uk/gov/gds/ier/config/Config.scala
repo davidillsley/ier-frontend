@@ -1,11 +1,13 @@
 package uk.gov.gds.ier.config
 
+import javax.inject.Inject
+
 import com.google.inject.Singleton
+import play.Configuration
 import uk.gov.gds.ier.logging.Logging
 
 @Singleton
-class Config extends Logging {
-  private lazy val configuration = play.Play.application().configuration()
+class Config @Inject()(configuration: Configuration) extends Logging {
 
   def apiTimeout = configuration.getInt("api.timeout", 10).toInt
   def locateUrl = configuration.getString("locate.url")

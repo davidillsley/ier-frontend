@@ -9,6 +9,8 @@ import uk.gov.gds.ier.step.{OverseaStep, Routes}
 import uk.gov.gds.ier.model.{WaysToVote, WaysToVoteType}
 import uk.gov.gds.ier.transaction.overseas.InprogressOverseas
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 
 
 @Singleton
@@ -17,10 +19,12 @@ class WaysToVoteStep @Inject ()(
     val config: Config,
     val encryptionService : EncryptionService,
     val remoteAssets: RemoteAssets,
-    val overseas: OverseasControllers
+    val overseas: OverseasControllers,
+    val Messages: Messages
 ) extends OverseaStep
   with WaysToVoteForms
-  with WaysToVoteMustache {
+  with WaysToVoteMustache
+  with WithMessages {
 
   val validation = waysToVoteForm
 

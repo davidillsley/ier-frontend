@@ -6,9 +6,11 @@ import uk.gov.gds.ier.security.EncryptionService
 import uk.gov.gds.ier.serialiser.JsonSerialiser
 import uk.gov.gds.ier.step.{OrdinaryStep, Routes}
 import uk.gov.gds.ier.validation.ErrorTransformForm
-import uk.gov.gds.ier.transaction.ordinary.{OrdinaryControllers, InprogressOrdinary}
+import uk.gov.gds.ier.transaction.ordinary.{InprogressOrdinary, OrdinaryControllers}
 import uk.gov.gds.ier.service.AddressService
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 
 @Singleton
 class AddressManualStep @Inject() (
@@ -17,10 +19,12 @@ class AddressManualStep @Inject() (
     val encryptionService: EncryptionService,
     val addressService: AddressService,
     val remoteAssets: RemoteAssets,
-    val ordinary: OrdinaryControllers
+    val ordinary: OrdinaryControllers,
+    val Messages: Messages
 ) extends OrdinaryStep
   with AddressManualMustache
-  with AddressForms {
+  with AddressForms
+  with WithMessages {
 
   val validation = manualAddressForm
 

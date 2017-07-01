@@ -1,15 +1,16 @@
 package uk.gov.gds.ier.service
 
+import play.Configuration
 import uk.gov.gds.ier.test.UnitTestSuite
-import uk.gov.gds.ier.client.{LocateApiClient, ApiClient}
-import uk.gov.gds.ier.model.{Fail, Success, ApiResponse, Address}
+import uk.gov.gds.ier.client.{ApiClient, LocateApiClient}
+import uk.gov.gds.ier.model.{Address, ApiResponse, Fail, Success}
 import uk.gov.gds.ier.serialiser.JsonSerialiser
 import uk.gov.gds.ier.config.Config
 import uk.gov.gds.ier.guice.WithConfig
 
 class LocateServiceTest extends UnitTestSuite {
 
-  class MockConfig extends Config {
+  class MockConfig extends Config(Configuration.root()) {
     override def locateUrl = "http://locate/addresses"
     override def locateAuthorityUrl = "http://locate/authority"
     override def locateApiAuthorizationToken = "abc"
@@ -17,7 +18,7 @@ class LocateServiceTest extends UnitTestSuite {
 
   behavior of "LocateService.lookupAddress"
   it should "be able to parse a response from PostcodeAnywhere" in {
-    class FakeApiClient extends LocateApiClient(new MockConfig) {
+    class FakeApiClient extends LocateApiClient(new MockConfig, FakeApplication()) {
       override def get(url: String, headers: (String, String)*) : ApiResponse = {
         if (url == "http://locate/addresses?postcode=ab123cd") {
           Success("""[
@@ -52,7 +53,7 @@ class LocateServiceTest extends UnitTestSuite {
   }
 
   it should "strip postcode from special characters and trailing spaces" in {
-    class FakeApiClient extends LocateApiClient(new MockConfig) {
+    class FakeApiClient extends LocateApiClient(new MockConfig, FakeApplication()) {
       override def get(url: String, headers: (String, String)*) : ApiResponse = {
         if (url == "http://locate/addresses?postcode=ab123cd") {
           Success("""[
@@ -88,7 +89,7 @@ class LocateServiceTest extends UnitTestSuite {
 
   behavior of "LocateService.lookupAuthority"
   it should "lookup an authority successfully" in {
-    class FakeApiClient extends LocateApiClient(new MockConfig) {
+    class FakeApiClient extends LocateApiClient(new MockConfig, FakeApplication()) {
       override def get(url: String, headers: (String, String)*) : ApiResponse = {
         if (url == "http://locate/authority?postcode=ab123cd") {
           Success("""
@@ -119,7 +120,7 @@ class LocateServiceTest extends UnitTestSuite {
   }
 
   it should "strip postcode from special characters and trailing spaces" in {
-    class FakeApiClient extends LocateApiClient(new MockConfig) {
+    class FakeApiClient extends LocateApiClient(new MockConfig, FakeApplication()) {
       override def get(url: String, headers: (String, String)*) : ApiResponse = {
         if (url == "http://locate/authority?postcode=ab123cd") {
           Success("""
@@ -165,7 +166,7 @@ class LocateServiceTest extends UnitTestSuite {
 
   behavior of "LocateService.lookupGssCode"
   it should "return gssCode for a given postcode" in {
-    class FakeApiClient extends LocateApiClient(new MockConfig) {
+    class FakeApiClient extends LocateApiClient(new MockConfig, FakeApplication()) {
       override def get(url: String, headers: (String, String)*) : ApiResponse = {
         if (url == "http://locate/authority?postcode=ab123cd") {
           Success("""
@@ -188,7 +189,7 @@ class LocateServiceTest extends UnitTestSuite {
   }
 
   it should "strip postcode from special characters and trailing spaces" in {
-    class FakeApiClient extends LocateApiClient(new MockConfig) {
+    class FakeApiClient extends LocateApiClient(new MockConfig, FakeApplication()) {
       override def get(url: String, headers: (String, String)*) : ApiResponse = {
         if (url == "http://locate/authority?postcode=ab123cd") {
           Success("""
@@ -241,7 +242,7 @@ class LocateServiceTest extends UnitTestSuite {
 
   behavior of "LocateService.beaconFire"
   it should "return true if locate api is up" in {
-    class FakeApiClient extends LocateApiClient(new MockConfig) {
+    class FakeApiClient extends LocateApiClient(new MockConfig, FakeApplication()) {
       override def get(url: String, header: (String, String)*) : ApiResponse = {
         if (url.contains("status")) {
           Success("""{ "status" : "up" }""", 200)
@@ -252,7 +253,7 @@ class LocateServiceTest extends UnitTestSuite {
     service.beaconFire should be(true)
   }
   it should "return false if locate api is down" in {
-    class FakeApiClient extends LocateApiClient(new MockConfig) {
+    class FakeApiClient extends LocateApiClient(new MockConfig, FakeApplication()) {
       override def get(url: String, header: (String, String)*) : ApiResponse = {
         if (url.contains("status")) {
           Success("""{ "status" : "down" }""", 200)
@@ -263,7 +264,7 @@ class LocateServiceTest extends UnitTestSuite {
     service.beaconFire should be(false)
   }
   it should "return true if locate api doesn't respond" in {
-    class FakeApiClient extends LocateApiClient(new MockConfig) {
+    class FakeApiClient extends LocateApiClient(new MockConfig, FakeApplication()) {
       override def get(url: String, header: (String, String)*) : ApiResponse = {
         Fail("I'm not really locate", 200)
       }

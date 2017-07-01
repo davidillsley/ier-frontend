@@ -1,14 +1,14 @@
 package uk.gov.gds.ier.transaction.complete
 
 import uk.gov.gds.ier.mustache.InheritedGovukMustache
-import uk.gov.gds.ier.guice.{WithRemoteAssets, WithConfig}
+import uk.gov.gds.ier.guice.{WithConfig, WithMessages, WithRemoteAssets}
 import uk.gov.gds.ier.service.apiservice.EroAuthorityDetails
 import uk.gov.gds.ier.langs.Messages
 import play.api.i18n.Lang
 
 trait CompleteMustache {
   self: WithRemoteAssets
-    with WithConfig =>
+    with WithConfig with WithMessages =>
 
   val _config = config
   val _remoteAssets = remoteAssets

@@ -1,17 +1,18 @@
 package uk.gov.gds.ier.langs
 
 import play.api.mvc._
-import com.google.inject.Singleton
+import com.google.inject.{Inject, Singleton}
+import play.api.i18n.MessagesApi
 
 @Singleton
-class MessagesController extends Controller {
+class MessagesController @Inject() (messages: Messages, messagesApi: MessagesApi) extends Controller {
 
   def all = Action {
-    Ok(Messages.jsMessages.all(Some("GOVUK.registerToVote.messages")))
+    Ok(messages.jsMessages.all(Some("GOVUK.registerToVote.messages")))
   }
 
   def forLang(langCode:String) = Action {
-    implicit val lang = Language.Lang(langCode)
-    Ok(Messages.jsMessages(Some("GOVUK.registerToVote.messages")))
+    implicit val mess = messagesApi.preferred(Seq(Language.Lang(langCode)))
+    Ok(messages.jsMessages(Some("GOVUK.registerToVote.messages")))
   }
 }

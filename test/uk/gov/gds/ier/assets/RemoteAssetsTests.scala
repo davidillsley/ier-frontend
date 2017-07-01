@@ -1,12 +1,13 @@
 package uk.gov.gds.ier.assets
 
+import play.Configuration
 import uk.gov.gds.ier.config.Config
 import play.api.test.FakeRequest
 import uk.gov.gds.ier.test._
 
 class RemoteAssetsTests extends UnitTestSuite {
 
-  val fakeConfig = new Config {
+  val fakeConfig = new Config(Configuration.root()) {
     override def assetsPath = "/my-asset-path"
     override def revision = "abcdef1234567890abcdef1234567890abcdef12"
   }

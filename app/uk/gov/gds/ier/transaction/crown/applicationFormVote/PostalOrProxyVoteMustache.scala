@@ -3,7 +3,7 @@ package uk.gov.gds.ier.transaction.crown.applicationFormVote
 import uk.gov.gds.ier.validation.ErrorTransformForm
 import uk.gov.gds.ier.model.{WaysToVoteType}
 import play.api.mvc.Call
-import play.api.templates.Html
+import play.twirl.api.Html
 import uk.gov.gds.ier.step.StepTemplate
 import uk.gov.gds.ier.transaction.crown.InprogressCrown
 

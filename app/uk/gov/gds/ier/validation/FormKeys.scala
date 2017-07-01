@@ -1,6 +1,7 @@
 package uk.gov.gds.ier.validation
 
-import play.api.templates.Html
+import play.twirl.api.{Html, HtmlFormat}
+
 import scala.Some
 import uk.gov.gds.ier.transaction.ordinary.InprogressOrdinary
 
@@ -194,8 +195,8 @@ trait FormKeys {
     def each(from:Int = 0)(block: (String, Int) => Html):Html = {
       val field = formData(key.item(from))
       field.value match {
-        case Some(value) => block(field.name, from) += each(from+1)(block)
-        case None => Html.empty
+        case Some(value) => HtmlFormat.fill(List(block(field.name, from), each(from+1)(block)))
+        case None => Html("")
       }
     }
   }

@@ -4,21 +4,21 @@ import uk.gov.gds.ier.controller.routes.ErrorController
 import uk.gov.gds.ier.transaction.complete.routes.CompleteStep
 import com.google.inject.{Inject, Singleton}
 import uk.gov.gds.ier.serialiser.JsonSerialiser
-import uk.gov.gds.ier.service.{ScotlandService, WithAddressService, AddressService}
+import uk.gov.gds.ier.service.{AddressService, ScotlandService, WithAddressService}
 import uk.gov.gds.ier.config.Config
 import uk.gov.gds.ier.security.EncryptionService
 import uk.gov.gds.ier.step.ConfirmationStepController
 import uk.gov.gds.ier.service.apiservice.IerApiService
 import uk.gov.gds.ier.assets.RemoteAssets
-import uk.gov.gds.ier.guice.WithRemoteAssets
+import uk.gov.gds.ier.guice.{WithMessages, WithRemoteAssets}
 import uk.gov.gds.ier.transaction.complete.CompleteCookie
 import uk.gov.gds.ier.session.ResultHandling
-import uk.gov.gds.ier.langs.Language
+import uk.gov.gds.ier.langs.{Language, Messages}
 import uk.gov.gds.ier.step.Routes
 import uk.gov.gds.ier.transaction.ordinary.InprogressOrdinary
 import uk.gov.gds.ier.model.{Nino, PostalVoteOption}
-import uk.gov.gds.ier.transaction.ordinary.{WithOrdinaryControllers, OrdinaryControllers}
-import uk.gov.gds.ier.validation.{DateValidator, CountryValidator}
+import uk.gov.gds.ier.transaction.ordinary.{OrdinaryControllers, WithOrdinaryControllers}
+import uk.gov.gds.ier.validation.{CountryValidator, DateValidator}
 
 @Singleton
 class ConfirmationStep @Inject ()(
@@ -29,14 +29,16 @@ class ConfirmationStep @Inject ()(
     val config: Config,
     val encryptionService : EncryptionService,
     val remoteAssets: RemoteAssets,
-    val ordinary: OrdinaryControllers
+    val ordinary: OrdinaryControllers,
+    val Messages: Messages
   ) extends ConfirmationStepController[InprogressOrdinary]
   with ConfirmationForms
   with ConfirmationMustache
   with ResultHandling
   with WithAddressService
   with WithOrdinaryControllers
-  with WithRemoteAssets {
+  with WithRemoteAssets
+  with WithMessages {
 
   def factoryOfT() = InprogressOrdinary()
   def timeoutPage() = ErrorController.ordinaryTimeout

@@ -11,6 +11,7 @@ import uk.gov.gds.ier.controller.routes.ExitController
 import uk.gov.gds.ier.step.Step
 import uk.gov.gds.ier.transaction.forces.InprogressForces
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.langs.Messages
 
 class AddressSelectStepMockedTests
   extends MockingTestSuite
@@ -22,6 +23,7 @@ class AddressSelectStepMockedTests
     val mockedEncryptionService = mock[EncryptionService]
     val mockedAddressService = mock[AddressService]
     val mockedRemoteAssets = mock[RemoteAssets]
+    val mockMessages = mock[Messages]
 
     val partialAddress = PartialAddress(Some("123 Fake Street, Fakerton"), Some("123456789"), "WR26NJ",
         Some(PartialManualAddress(Some("line1"), Some("line2"), Some("line3"), Some("city"))))
@@ -38,7 +40,8 @@ class AddressSelectStepMockedTests
       mockedEncryptionService,
       mockedAddressService,
       mockedRemoteAssets,
-      forces
+      forces,
+      mockMessages
     )
 
     when (mockedAddressService.fillAddressLine(partialAddress)).thenReturn(partialAddress)

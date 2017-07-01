@@ -18,6 +18,7 @@ import uk.gov.gds.ier.model.Country
 import uk.gov.gds.ier.model.noDOB
 import uk.gov.gds.ier.transaction.ordinary.InprogressOrdinary
 import uk.gov.gds.ier.model.DOB
+
 import scala.Some
 import org.joda.time.LocalDate
 import uk.gov.gds.ier.service.AddressService
@@ -28,8 +29,10 @@ import uk.gov.gds.ier.step.Routes
 import uk.gov.gds.ier.model.Country
 import uk.gov.gds.ier.transaction.ordinary.InprogressOrdinary
 import uk.gov.gds.ier.model.DOB
+
 import scala.Some
 import play.api.mvc.Call
+import uk.gov.gds.ier.langs.Messages
 import uk.gov.gds.ier.model.noDOB
 
 class DateOfBirthStepMockedTests extends MockingTestSuite {
@@ -45,6 +48,7 @@ class DateOfBirthStepMockedTests extends MockingTestSuite {
     val mockedScotlandService = mock[ScotlandService]
     val mockNameStep = mock[NameStep]
     val mockRoutes = mock[Routes]
+    val mockMessages = mock[Messages]
 
     val dobStep = new DateOfBirthStep(
       mockedJsonSerialiser,
@@ -53,7 +57,8 @@ class DateOfBirthStepMockedTests extends MockingTestSuite {
       mockedRemoteAssets,
       mockedControllers,
       mockedAddressService,
-      mockedScotlandService
+      mockedScotlandService,
+      mockMessages
     )
 
     when(mockedControllers.NameStep).thenReturn(mockNameStep)
@@ -90,6 +95,7 @@ class DateOfBirthStepMockedTests extends MockingTestSuite {
     val mockedScotlandService = mock[ScotlandService]
     val mockNameStep = mock[NameStep]
     val mockRoutes = mock[Routes]
+    val mockMessages = mock[Messages]
 
     val dobStep = new DateOfBirthStep(
       mockedJsonSerialiser,
@@ -98,7 +104,8 @@ class DateOfBirthStepMockedTests extends MockingTestSuite {
       mockedRemoteAssets,
       mockedControllers,
       mockedAddressService,
-      mockedScotlandService
+      mockedScotlandService,
+      mockMessages
     )
 
     when(mockedControllers.NameStep).thenReturn(mockNameStep)
@@ -137,6 +144,7 @@ class DateOfBirthStepMockedTests extends MockingTestSuite {
     val mockedScotlandService = mock[ScotlandService]
     val mockNameStep = mock[NameStep]
     val mockRoutes = mock[Routes]
+    val mockMessages = mock[Messages]
 
     val dobStep = new DateOfBirthStep(
       mockedJsonSerialiser,
@@ -145,7 +153,8 @@ class DateOfBirthStepMockedTests extends MockingTestSuite {
       mockedRemoteAssets,
       mockedControllers,
       mockedAddressService,
-      mockedScotlandService
+      mockedScotlandService,
+      mockMessages
     )
 
     when(mockedControllers.NameStep).thenReturn(mockNameStep)
@@ -183,6 +192,7 @@ class DateOfBirthStepMockedTests extends MockingTestSuite {
     val mockedScotlandService = mock[ScotlandService]
     val mockNameStep = mock[NameStep]
     val mockRoutes = mock[Routes]
+    val mockMessages = mock[Messages]
 
     val dobStep = new DateOfBirthStep(
       mockedJsonSerialiser,
@@ -191,7 +201,8 @@ class DateOfBirthStepMockedTests extends MockingTestSuite {
       mockedRemoteAssets,
       mockedControllers,
       mockedAddressService,
-      mockedScotlandService
+      mockedScotlandService,
+      mockMessages
     )
 
     when(mockedControllers.NameStep).thenReturn(mockNameStep)
@@ -243,6 +254,7 @@ class DateOfBirthStepMockedTests extends MockingTestSuite {
     val mockedScotlandService = mock[ScotlandService]
     val mockNameStep = mock[NameStep]
     val mockRoutes = mock[Routes]
+    val mockMessages = mock[Messages]
 
     val dobStep = new DateOfBirthStep(
       mockedJsonSerialiser,
@@ -251,7 +263,8 @@ class DateOfBirthStepMockedTests extends MockingTestSuite {
       mockedRemoteAssets,
       mockedControllers,
       mockedAddressService,
-      mockedScotlandService
+      mockedScotlandService,
+      mockMessages
     )
 
     when(mockedControllers.NameStep).thenReturn(mockNameStep)

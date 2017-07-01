@@ -8,10 +8,11 @@ import uk.gov.gds.ier.validation._
 import uk.gov.gds.ier.config.Config
 import uk.gov.gds.ier.security.EncryptionService
 import uk.gov.gds.ier.service.AddressService
-
-import uk.gov.gds.ier.step.{Routes, ForcesStep}
+import uk.gov.gds.ier.step.{ForcesStep, Routes}
 import uk.gov.gds.ier.transaction.forces.InprogressForces
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 import uk.gov.gds.ier.model.HasAddressOption
 
 @Singleton
@@ -21,11 +22,13 @@ class AddressFirstStep @Inject ()(
     val encryptionService : EncryptionService,
     val addressService: AddressService,
     val remoteAssets: RemoteAssets,
-    val forces: ForcesControllers
+    val forces: ForcesControllers,
+    val Messages: Messages
 ) extends ForcesStep
   with AddressFirstMustache
   with AddressFirstForms
-  with AddressForms {
+  with AddressForms
+  with WithMessages {
 
   val validation = addressFirstForm
 

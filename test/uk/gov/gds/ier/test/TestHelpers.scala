@@ -18,7 +18,6 @@ import uk.gov.gds.ier.transaction.ordinary.InprogressOrdinary
 import uk.gov.gds.ier.transaction.overseas.InprogressOverseas
 import scala.util.Try
 import play.api.mvc.Cookies
-import uk.gov.gds.common.json.JsonSerializer
 import uk.gov.gds.ier.transaction.complete.CompleteCookie
 
 trait TestHelpers
@@ -235,7 +234,7 @@ trait TestHelpers
     )(
       implicit manifest: Manifest[T],
       encryptionService: EncryptionService,
-      serialiser: JsonSerializer): Option[T] = {
+      serialiser: JsonSerialiser): Option[T] = {
     getSessionCookie[T](cookies, sessionPayloadKey, sessionPayloadKeyIV)
   }
 
@@ -252,7 +251,7 @@ trait TestHelpers
       cookies: Cookies
   ) (
       implicit encryptionService: EncryptionService,
-      serialiser: JsonSerializer
+      serialiser: JsonSerialiser
   ): Option[CompleteCookie] = {
     getSessionCookie[CompleteCookie](cookies, completeCookieKey, completeCookieKeyIV)
   }
@@ -264,7 +263,7 @@ trait TestHelpers
     )(
       implicit manifest: Manifest[T],
       encryptionService: EncryptionService,
-      serialiser: JsonSerializer): Option[T] = {
+      serialiser: JsonSerialiser): Option[T] = {
     val application = for {
       cookie <- cookies.get(key)
       cookieInitVec <- cookies.get(keyIV)

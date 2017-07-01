@@ -6,10 +6,13 @@ import uk.gov.gds.ier.serialiser.JsonSerialiser
 import uk.gov.gds.ier.config.Config
 import uk.gov.gds.ier.security.EncryptionService
 import uk.gov.gds.ier.step.{ForcesStep, Routes}
+
 import scala.Some
 import uk.gov.gds.ier.transaction.forces.InprogressForces
 import uk.gov.gds.ier.model.WaysToVoteType
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 
 @Singleton
 class ProxyVoteStep @Inject ()(
@@ -17,10 +20,12 @@ class ProxyVoteStep @Inject ()(
     val config: Config,
     val encryptionService : EncryptionService,
     val remoteAssets: RemoteAssets,
-    val forces: ForcesControllers
+    val forces: ForcesControllers,
+    val Messages: Messages
 ) extends ForcesStep
   with PostalOrProxyVoteForms
-  with PostalOrProxyVoteMustache {
+  with PostalOrProxyVoteMustache
+  with WithMessages {
 
   val wayToVote = WaysToVoteType.ByProxy
 

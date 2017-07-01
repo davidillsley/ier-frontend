@@ -6,11 +6,13 @@ import com.google.inject.{Inject, Singleton}
 import uk.gov.gds.ier.serialiser.JsonSerialiser
 import uk.gov.gds.ier.config.Config
 import uk.gov.gds.ier.security.EncryptionService
-import uk.gov.gds.ier.step.{OverseaStep, Routes, GoTo}
+import uk.gov.gds.ier.step.{GoTo, OverseaStep, Routes}
 import uk.gov.gds.ier.model._
-import org.joda.time.{Months, DateTime}
+import org.joda.time.{DateTime, Months}
 import uk.gov.gds.ier.transaction.overseas.InprogressOverseas
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 
 @Singleton
 class DateLeftArmyStep @Inject() (
@@ -18,8 +20,9 @@ class DateLeftArmyStep @Inject() (
     val config: Config,
     val encryptionService: EncryptionService,
     val remoteAssets: RemoteAssets,
-    val overseas: OverseasControllers
-) extends DateLeftSpecialStep {
+    val overseas: OverseasControllers,
+    val Messages: Messages
+) extends DateLeftSpecialStep with WithMessages {
 
   val service = "member of the armed forces"
 
@@ -37,8 +40,9 @@ class DateLeftCrownStep @Inject() (
     val config: Config,
     val encryptionService: EncryptionService,
     val remoteAssets: RemoteAssets,
-    val overseas: OverseasControllers
-) extends DateLeftSpecialStep {
+    val overseas: OverseasControllers,
+    val Messages: Messages
+) extends DateLeftSpecialStep with WithMessages {
 
   val service = "Crown Servant"
 
@@ -56,8 +60,9 @@ class DateLeftCouncilStep @Inject() (
     val config: Config,
     val encryptionService: EncryptionService,
     val remoteAssets: RemoteAssets,
-    val overseas: OverseasControllers
-) extends DateLeftSpecialStep {
+    val overseas: OverseasControllers,
+    val Messages: Messages
+) extends DateLeftSpecialStep with WithMessages {
 
  val service = "British Council employee"
 

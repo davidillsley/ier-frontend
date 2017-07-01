@@ -1,8 +1,7 @@
 package uk.gov.gds.ier.localAuthority
 
 import uk.gov.gds.ier.mustache.InheritedGovukMustache
-import uk.gov.gds.ier.guice.WithRemoteAssets
-import uk.gov.gds.ier.guice.WithConfig
+import uk.gov.gds.ier.guice.{WithConfig, WithMessages, WithRemoteAssets}
 import uk.gov.gds.ier.mustache.MustacheModel
 import uk.gov.gds.ier.validation.ErrorTransformForm
 import uk.gov.gds.ier.model.LocalAuthorityContactDetails
@@ -11,7 +10,7 @@ import uk.gov.gds.ier.langs.Messages
 trait LocalAuthorityMustache
   extends InheritedGovukMustache with MustacheModel {
   self: WithRemoteAssets
-  with WithConfig =>
+  with WithConfig with WithMessages =>
 
     case class LocalAuthorityShowPage (
       localAuthorityContact: Option[LocalAuthorityContactDetails],

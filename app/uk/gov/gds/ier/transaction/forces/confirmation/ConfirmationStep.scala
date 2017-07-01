@@ -1,8 +1,8 @@
 package uk.gov.gds.ier.transaction.forces.confirmation
 
-import uk.gov.gds.ier.langs.Language
+import uk.gov.gds.ier.langs.{Language, Messages}
 import uk.gov.gds.ier.transaction.forces.ForcesControllers
-import uk.gov.gds.ier.controller.routes.{ExitController, ErrorController}
+import uk.gov.gds.ier.controller.routes.{ErrorController, ExitController}
 import uk.gov.gds.ier.transaction.complete.routes.CompleteStep
 import uk.gov.gds.ier.step.ConfirmationStepController
 import uk.gov.gds.ier.security.EncryptionService
@@ -10,10 +10,10 @@ import uk.gov.gds.ier.serialiser.JsonSerialiser
 import uk.gov.gds.ier.config.Config
 import com.google.inject.{Inject, Singleton}
 import uk.gov.gds.ier.service.apiservice.IerApiService
-import uk.gov.gds.ier.service.{WithAddressService, AddressService}
-import uk.gov.gds.ier.guice.WithRemoteAssets
+import uk.gov.gds.ier.service.{AddressService, WithAddressService}
+import uk.gov.gds.ier.guice.{WithMessages, WithRemoteAssets}
 import uk.gov.gds.ier.assets.RemoteAssets
-import uk.gov.gds.ier.model.{WaysToVoteType, ApplicationType}
+import uk.gov.gds.ier.model.{ApplicationType, WaysToVoteType}
 import uk.gov.gds.ier.transaction.complete.CompleteCookie
 import uk.gov.gds.ier.session.ResultHandling
 import uk.gov.gds.ier.step.Routes
@@ -27,14 +27,16 @@ class ConfirmationStep @Inject() (
     val addressService: AddressService,
     val remoteAssets: RemoteAssets,
     val forces: ForcesControllers,
-    ierApi: IerApiService)
+    ierApi: IerApiService,
+    val Messages: Messages)
   extends ConfirmationStepController[InprogressForces]
   with ConfirmationForms
   with ConfirmationMustache
   with ResultHandling
   with WithForcesControllers
   with WithAddressService
-  with WithRemoteAssets {
+  with WithRemoteAssets
+    with WithMessages {
 
   def factoryOfT() = InprogressForces()
   def timeoutPage() = ErrorController.forcesTimeout

@@ -8,6 +8,8 @@ import uk.gov.gds.ier.security.EncryptionService
 import uk.gov.gds.ier.step.{ForcesStep, Routes}
 import uk.gov.gds.ier.transaction.forces.InprogressForces
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.guice.WithMessages
+import uk.gov.gds.ier.langs.Messages
 
 @Singleton
 class RankStep @Inject ()(
@@ -15,10 +17,12 @@ class RankStep @Inject ()(
     val config: Config,
     val encryptionService : EncryptionService,
     val remoteAssets: RemoteAssets,
-    val forces: ForcesControllers
+    val forces: ForcesControllers,
+    val Messages: Messages
 ) extends ForcesStep
   with RankForms
-  with RankMustache {
+  with RankMustache
+  with WithMessages {
 
   val validation = rankForm
 

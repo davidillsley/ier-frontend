@@ -11,6 +11,7 @@ import uk.gov.gds.ier.controller.routes.ExitController
 import uk.gov.gds.ier.step.Step
 import uk.gov.gds.ier.transaction.forces.InprogressForces
 import uk.gov.gds.ier.assets.RemoteAssets
+import uk.gov.gds.ier.langs.Messages
 
 class AddressFirstStepMockedTests
   extends MockingTestSuite
@@ -22,6 +23,7 @@ class AddressFirstStepMockedTests
     val mockedEncryptionService = mock[EncryptionService]
     val mockedAddressService = mock[AddressService]
     val mockedRemoteAssets = mock[RemoteAssets]
+    val mockMessages = mock[Messages]
 
     val currentState = completeForcesApplication.copy(
       address = Some(LastAddress(
@@ -41,7 +43,8 @@ class AddressFirstStepMockedTests
       mockedEncryptionService,
       mockedAddressService,
       mockedRemoteAssets,
-      forces
+      forces,
+      mockMessages
     )
 
     val result = addressFirstStep.clearPreviousAddress(currentState)

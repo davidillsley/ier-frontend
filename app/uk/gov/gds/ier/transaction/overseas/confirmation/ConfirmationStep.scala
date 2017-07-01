@@ -1,11 +1,11 @@
 package uk.gov.gds.ier.transaction.overseas.confirmation
 
-import uk.gov.gds.ier.langs.Language
-import uk.gov.gds.ier.service.{WithAddressService, AddressService}
+import uk.gov.gds.ier.langs.{Language, Messages}
+import uk.gov.gds.ier.service.{AddressService, WithAddressService}
 import uk.gov.gds.ier.transaction.overseas.{OverseasControllers, WithOverseasControllers}
 import uk.gov.gds.ier.controller.routes.ErrorController
 import uk.gov.gds.ier.transaction.complete.routes.CompleteStep
-import uk.gov.gds.ier.model.{PostalVoteOption, WaysToVoteType, ApplicationType}
+import uk.gov.gds.ier.model.{ApplicationType, PostalVoteOption, WaysToVoteType}
 import uk.gov.gds.ier.step.ConfirmationStepController
 import uk.gov.gds.ier.security.EncryptionService
 import uk.gov.gds.ier.serialiser.JsonSerialiser
@@ -14,7 +14,7 @@ import com.google.inject.{Inject, Singleton}
 import uk.gov.gds.ier.mustache.ErrorPageMustache
 import uk.gov.gds.ier.service.apiservice.IerApiService
 import uk.gov.gds.ier.assets.RemoteAssets
-import uk.gov.gds.ier.guice.WithRemoteAssets
+import uk.gov.gds.ier.guice.{WithMessages, WithRemoteAssets}
 import uk.gov.gds.ier.session.ResultHandling
 import uk.gov.gds.ier.transaction.overseas.InprogressOverseas
 import uk.gov.gds.ier.step.Routes
@@ -28,7 +28,8 @@ class ConfirmationStep @Inject() (
     ierApi: IerApiService,
     val remoteAssets: RemoteAssets,
     val overseas: OverseasControllers,
-    val addressService: AddressService
+    val addressService: AddressService,
+    val Messages: Messages
   ) extends ConfirmationStepController[InprogressOverseas]
   with WithOverseasControllers
   with ConfirmationForms
@@ -36,7 +37,8 @@ class ConfirmationStep @Inject() (
   with WithAddressService
   with ConfirmationMustache
   with ResultHandling
-  with WithRemoteAssets {
+  with WithRemoteAssets
+  with WithMessages {
 
   def factoryOfT() = InprogressOverseas()
   def timeoutPage() = ErrorController.ordinaryTimeout
