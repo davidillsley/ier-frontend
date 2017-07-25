@@ -20,8 +20,7 @@ class PreviousAddressFirstStep @Inject ()(
     val encryptionService : EncryptionService,
     val addressService: AddressService,
     val remoteAssets: RemoteAssets,
-    val crown: CrownControllers,
-    val Messages: Messages
+    val crown: CrownControllers
 ) extends CrownStep
   with PreviousAddressFirstMustache
   with PreviousAddressFirstForms

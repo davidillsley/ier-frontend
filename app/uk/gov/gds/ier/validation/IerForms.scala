@@ -28,7 +28,9 @@ trait IerForms extends OrdinaryMappings with ConfirmationForms {
     def errorsAsMap(implicit lang: Lang) = {
       form.errors.groupBy(_.key).mapValues {
         errors =>
-          errors.map(e => Messages(e.message, e.args: _*))
+          implicit val application = play.api.Play.current
+          implicit val messages = play.api.i18n.Messages.Implicits.applicationMessages
+          errors.map(e => play.api.i18n.Messages(e.message, e.args: _*))
       }
     }
     def simpleErrors(implicit messages: play.api.i18n.Messages): Map[String, String] = {

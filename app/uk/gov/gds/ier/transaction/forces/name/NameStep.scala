@@ -17,8 +17,7 @@ class NameStep @Inject ()(
     val config: Config,
     val encryptionService : EncryptionService,
     val remoteAssets: RemoteAssets,
-    val forces: ForcesControllers,
-    val Messages: Messages
+    val forces: ForcesControllers
 ) extends ForcesStep
   with NameForms
   with NameMustache

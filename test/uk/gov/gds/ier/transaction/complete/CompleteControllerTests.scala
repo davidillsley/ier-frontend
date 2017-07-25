@@ -86,73 +86,77 @@ class CompleteControllerTests extends ControllerTestSuite {
   }
 
   it should "display the page with email confirmation info" in runningApp {
-    val Some(result) = route(
-      FakeRequest(GET, "/register-to-vote/complete")
-        .withCompleteCookie(CompleteCookie(
-          refNum = "123457689013",
-          splitRef1 = "12345",
-          splitRef2 = "67891",
-          authority = Some(EroAuthorityDetails(
-            name = "Hornsey Council",
-            urls = List(),
-            email = None,
-            phone = None,
-            addressLine1 = None,
-            addressLine2 = None,
-            addressLine3 = None,
-            addressLine4 = None,
-            postcode = None
-          )),
-          hasOtherAddress = true,
-          backToStartUrl = "/register-to-vote/start",
-          showEmailConfirmation = true,
-          showBirthdayBunting = false,
-          showDeadlineText = false
-        ))
-        .withIerSession()
-    )
+    running(FakeApplication()) {
+      val Some(result) = route(
+        FakeRequest(GET, "/register-to-vote/complete")
+          .withCompleteCookie(CompleteCookie(
+            refNum = "123457689013",
+            splitRef1 = "12345",
+            splitRef2 = "67891",
+            authority = Some(EroAuthorityDetails(
+              name = "Hornsey Council",
+              urls = List(),
+              email = None,
+              phone = None,
+              addressLine1 = None,
+              addressLine2 = None,
+              addressLine3 = None,
+              addressLine4 = None,
+              postcode = None
+            )),
+            hasOtherAddress = true,
+            backToStartUrl = "/register-to-vote/start",
+            showEmailConfirmation = true,
+            showBirthdayBunting = false,
+            showDeadlineText = false
+          ))
+          .withIerSession()
+      )
 
-    status(result) should be(OK)
-    contentType(result) should be(Some("text/html"))
-    val renderedOutput = contentAsString(result)
+      status(result) should be(OK)
+      contentType(result) should be(Some("text/html"))
+      val renderedOutput = contentAsString(result)
 
-    renderedOutput should include("We have sent you an acknowledgement email.")
-    renderedOutput should not include("Happy Birthday")
+      renderedOutput should include("We have sent you an acknowledgement email.")
+      renderedOutput should not include ("Happy Birthday")
+    }
   }
 
   it should "display the page without email confirmation info" in runningApp {
-    val Some(result) = route(
-      FakeRequest(GET, "/register-to-vote/complete")
-        .withCompleteCookie(CompleteCookie(
-          refNum = "123457689013",
-          splitRef1 = "12345",
-          splitRef2 = "67891",
-          authority = Some(EroAuthorityDetails(
-            name = "Hornsey Council",
-            urls = List(),
-            email = None,
-            phone = None,
-            addressLine1 = None,
-            addressLine2 = None,
-            addressLine3 = None,
-            addressLine4 = None,
-            postcode = None
-          )),
-          hasOtherAddress = true,
-          backToStartUrl = "/register-to-vote/start",
-          showEmailConfirmation = false,
-          showBirthdayBunting = false,
-          showDeadlineText = false
-        ))
-        .withIerSession()
-    )
+    running(FakeApplication()) {
+      val Some(result) = route(
+        FakeRequest(GET, "/register-to-vote/complete")
+          .withCompleteCookie(CompleteCookie(
+            refNum = "123457689013",
+            splitRef1 = "12345",
+            splitRef2 = "67891",
+            authority = Some(EroAuthorityDetails(
+              name = "Hornsey Council",
+              urls = List(),
+              email = None,
+              phone = None,
+              addressLine1 = None,
+              addressLine2 = None,
+              addressLine3 = None,
+              addressLine4 = None,
+              postcode = None
+            )),
+            hasOtherAddress = true,
+            backToStartUrl = "/register-to-vote/start",
+            showEmailConfirmation = false,
+            showBirthdayBunting = false,
+            showDeadlineText = false
+          ))
+          .withIerSession()
+      )
 
-    status(result) should be(OK)
-    contentType(result) should be(Some("text/html"))
-    val renderedOutput = contentAsString(result)
+      status(result) should be(OK)
+      contentType(result) should be(Some("text/html"))
+      val renderedOutput = contentAsString(result)
 
-    renderedOutput should not include("We have sent you a confirmation email.")
-    renderedOutput should not include("Happy Birthday")
+      renderedOutput should not include ("We have sent you a confirmation email.")
+      renderedOutput should not include ("Happy Birthday")
+    }
   }
 
   it should "display happy birthday bunting" in {

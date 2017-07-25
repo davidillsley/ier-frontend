@@ -21,8 +21,7 @@ class NameStep @Inject ()(
     val remoteAssets: RemoteAssets,
     val ordinary: OrdinaryControllers,
     val addressService: AddressService,
-    val scotlandService: ScotlandService,
-    val Messages: Messages)
+    val scotlandService: ScotlandService)
   extends OrdinaryStep
   with NameForms
   with NameMustache

@@ -21,8 +21,7 @@ class PreviousAddressFirstStep @Inject ()(
     val addressService: AddressService,
     val scotlandService: ScotlandService,
     val remoteAssets: RemoteAssets,
-    val ordinary: OrdinaryControllers,
-    val Messages: Messages
+    val ordinary: OrdinaryControllers
 ) extends OrdinaryStep
   with PreviousAddressFirstMustache
   with PreviousAddressFirstForms

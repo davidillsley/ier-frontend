@@ -3,7 +3,7 @@
         <h1>{{question.title}}</h1>
     </header>
 
-    {{> shared/validationMessages }}
+    {{> /shared/validationMessages }}
 
     <fieldset class="validate {{statementFieldSet.classes}}"
               data-validation-name="statement"
@@ -19,7 +19,7 @@
                    data-validation-name="member"
                    data-validation-type="field"
                    data-validation-rules="nonEmpty"
-                  {{statementMemberForcesCheckbox.attributes}}>
+                  {{{statementMemberForcesCheckbox.attributes}}}>
             I am a member of the armed forces
         </label>
 
@@ -31,7 +31,7 @@
                    data-validation-name="partner"
                    data-validation-type="field"
                    data-validation-rules="nonEmpty"
-                   {{statementPartnerForcesCheckbox.attributes}}>
+                   {{{statementPartnerForcesCheckbox.attributes}}}>
             I am the wife, husband or civil partner of a member of the armed forces
         </label>
 

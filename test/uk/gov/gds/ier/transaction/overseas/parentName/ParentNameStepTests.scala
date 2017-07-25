@@ -6,7 +6,6 @@ import uk.gov.gds.ier.security.EncryptionService
 import uk.gov.gds.ier.serialiser.JsonSerialiser
 import uk.gov.gds.ier.test._
 import uk.gov.gds.ier.assets.RemoteAssets
-import uk.gov.gds.ier.langs.Messages
 
 class ParentNameStepTests
   extends MockingTestSuite
@@ -17,15 +16,13 @@ class ParentNameStepTests
     val mockedConfig = mock[Config]
     val mockedEncryptionService = mock[EncryptionService]
     val mockedRemoteAssets = mock[RemoteAssets]
-    val mockMessages = mock[Messages]
 
     val parentNameStep = new ParentNameStep(
       mockedJsonSerialiser,
       mockedConfig,
       mockedEncryptionService,
       mockedRemoteAssets,
-      overseas,
-      mockMessages
+      overseas
     )
 
     val currentState = completeOverseasApplication.copy(overseasParentName = Some(OverseasParentName(

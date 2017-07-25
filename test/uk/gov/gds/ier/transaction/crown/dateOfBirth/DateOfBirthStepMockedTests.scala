@@ -14,7 +14,6 @@ import uk.gov.gds.ier.model.DateOfBirth
 import uk.gov.gds.ier.model.noDOB
 import uk.gov.gds.ier.model.DOB
 import play.api.mvc.Call
-import uk.gov.gds.ier.langs.Messages
 
 /*
  * This test mock the Date of Birth.
@@ -32,7 +31,6 @@ class DateOfBirthStepMockedTests extends MockingTestSuite {
     val mockedCrownControllers = mock[CrownControllers]
     val mockNameStep = mock[NameStep]
     val mockRoutes = mock[Routes]
-    val mockMessages = mock[Messages]
 
     when(mockedCrownControllers.NameStep).thenReturn(mockNameStep)
     when(mockNameStep.isStepComplete(any[InprogressCrown])).thenReturn(false)
@@ -44,8 +42,7 @@ class DateOfBirthStepMockedTests extends MockingTestSuite {
       mockedConfig,
       mockedEncryptionService,
       mockedRemoteAssets,
-      mockedCrownControllers,
-      mockMessages
+      mockedCrownControllers
     )
 
     val currentState = completeCrownApplication.copy(

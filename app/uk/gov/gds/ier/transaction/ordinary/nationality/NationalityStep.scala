@@ -20,8 +20,7 @@ class NationalityStep @Inject ()(
     val config: Config,
     val encryptionService : EncryptionService,
     val remoteAssets: RemoteAssets,
-    val ordinary: OrdinaryControllers,
-    val Messages: Messages
+    val ordinary: OrdinaryControllers
 ) extends OrdinaryStep
   with NationalityForms
   with NationalityMustache

@@ -1,8 +1,8 @@
 package uk.gov.gds.ier.guice
 
-import com.google.inject.Inject
-import com.google.inject.{Guice, Module}
+import com.google.inject.{Guice, Inject, Module, Singleton}
 
+@Singleton
 class Injector @Inject()(
     injector: com.google.inject.Injector
 ) {
@@ -13,9 +13,9 @@ class Injector @Inject()(
     injector.getInstance(dependencyClass)
   }
 }
-
-object Injector {
-  def apply(modules: List[Module]): Injector = {
-    new Injector(Guice.createInjector(modules:_*))
-  }
-}
+//
+//object Injector {
+//  def apply(modules: List[Module]): Injector = {
+//    new Injector(Guice.createInjector(modules:_*))
+//  }
+//}

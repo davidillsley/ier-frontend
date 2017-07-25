@@ -39,13 +39,14 @@ class SoleOccupancyControllerTests extends ControllerTestSuite {
   }
 
   it should "bind successfully and redirect to the confirmation step when complete application" in {
-    running(FakeApplication()) {
-      val Some(result) = route(
+    var app = FakeApplication()
+    running(app) {
+      val Some(result) = route(app,
         FakeRequest(POST, "/register-to-vote/sole-occupancy")
           .withIerSession()
           .withApplication(completeOrdinaryApplication)
           .withFormUrlEncodedBody(
-            "soleOccupancy.OptIn" -> "yes"
+            "soleOccupancy.optIn" -> "yes"
           )
       )
 

@@ -1,6 +1,6 @@
 package uk.gov.gds.ier
 
-import uk.gov.gds.ier.guice.GuiceContainer
+//import uk.gov.gds.ier.guice.GuiceContainer
 import com.google.inject.Binder
 import uk.gov.gds.ier.logging.Logging
 import uk.gov.gds.ier.mustache.ErrorPageMustache

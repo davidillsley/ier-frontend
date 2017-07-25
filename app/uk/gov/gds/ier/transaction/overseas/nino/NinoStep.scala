@@ -17,8 +17,7 @@ class NinoStep @Inject ()(
     val config: Config,
     val encryptionService : EncryptionService,
     val remoteAssets: RemoteAssets,
-    val overseas: OverseasControllers,
-    val Messages: Messages
+    val overseas: OverseasControllers
 ) extends OverseaStep
   with NinoForms
   with NinoMustache

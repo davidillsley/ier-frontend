@@ -15,8 +15,7 @@ class CompleteStep @Inject() (
     val serialiser: JsonSerialiser,
     val config: Config,
     val encryptionService: EncryptionService,
-    val remoteAssets: RemoteAssets,
-    val Messages: Messages
+    val remoteAssets: RemoteAssets
   ) extends Controller
   with ResultHandling
   with RequestHandling

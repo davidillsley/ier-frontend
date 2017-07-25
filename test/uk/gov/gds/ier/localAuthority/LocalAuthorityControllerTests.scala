@@ -24,7 +24,7 @@ import uk.gov.gds.ier.client.IerApiClient
 
 class LocalAuthorityControllerTests extends MockingControllerTestSuite {
 
-  val stubConfig = new Config(Configuration.root()) {
+  val stubConfig = new Config(Configuration.empty()) {
     override def locateUrl = "http://locateurl"
     override def locateAuthorityUrl = "http://localAuthorityUrl"
     override def locateApiAuthorizationToken = "token"

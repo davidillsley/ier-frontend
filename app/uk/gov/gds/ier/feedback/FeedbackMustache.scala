@@ -1,16 +1,16 @@
 package uk.gov.gds.ier.feedback
 
 import uk.gov.gds.ier.mustache.{InheritedGovukMustache, MustacheModel}
-import uk.gov.gds.ier.guice.{WithConfig, WithMessages, WithRemoteAssets}
+import uk.gov.gds.ier.guice.{WithConfig, WithRemoteAssets}
 import uk.gov.gds.ier.validation.ErrorTransformForm
+import uk.gov.gds.ier.langs.Messages
 
 trait FeedbackMustache
   extends InheritedGovukMustache
   with MustacheModel {
     self: WithRemoteAssets
      with FeedbackForm
-     with WithConfig
-     with WithMessages =>
+     with WithConfig =>
 
   case class ThankYouPage (
       override val sourcePath: String = ""

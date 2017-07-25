@@ -17,8 +17,7 @@ import uk.gov.gds.ier.langs.Messages
 class PostcodeController @Inject()(
     val addressService: AddressService,
     val serialiser: JsonSerialiser,
-    val scotlandService: ScotlandService,
-    val Messages: Messages
+    val scotlandService: ScotlandService
   ) extends Controller with ApiResults with WithSerialiser with IerForms with WithMessages {
 
   def lookupAddress(postcode: String) = Action {

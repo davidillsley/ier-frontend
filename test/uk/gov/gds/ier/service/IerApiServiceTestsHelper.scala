@@ -35,7 +35,7 @@ trait IerApiServiceTestsHelper extends TestHelpers with MockitoSugar {
     )
   ))
 
-  class MockConfig extends Config(Configuration.root()) with TestHelpers {
+  class MockConfig extends Config(Configuration.empty()) with TestHelpers {
     override def ierApiUrl = "testUrl"
     override def ierApiToken = "123457890"
   }

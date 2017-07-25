@@ -14,8 +14,7 @@ import uk.gov.gds.ier.langs.Messages
 class FeedbackPage @Inject ()(
     val config: Config,
     val remoteAssets: RemoteAssets,
-    val feedbackService: FeedbackService,
-    val Messages: Messages)
+    val feedbackService: FeedbackService)
   extends Controller
   with FeedbackForm
   with FeedbackMustache

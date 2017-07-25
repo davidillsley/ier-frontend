@@ -1,5 +1,7 @@
 package uk.gov.gds.ier.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
+
 case class PostalVote (
     postalVoteOption: Option[PostalVoteOption],
     deliveryMethod: Option[PostalVoteDeliveryMethod]
@@ -27,7 +29,9 @@ case class PostalVoteDeliveryMethod(
   deliveryMethod: Option[String],
   emailAddress: Option[String]) {
 
+  @JsonIgnore
   def isEmail = deliveryMethod.exists(_ == "email")
+  @JsonIgnore
   def isPost = deliveryMethod.exists(_ == "post")
 }
 

@@ -17,7 +17,7 @@ class StatusControllerTests extends ControllerTestSuite {
 
 }
 
-class MockConfig extends Config(Configuration.root()) {
+class MockConfig extends Config(Configuration.empty()) {
   override def revision = "a1b2c3d54"
   override def buildDate = "12/01/2012"
   override def buildNumber = "0001"

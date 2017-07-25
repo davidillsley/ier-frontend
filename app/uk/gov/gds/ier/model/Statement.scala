@@ -1,5 +1,7 @@
 package uk.gov.gds.ier.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
+
 case class Statement(
     memberForcesFlag: Option[Boolean],
     partnerForcesFlag: Option[Boolean]) {
@@ -8,6 +10,7 @@ case class Statement(
     if (isPartner) Map("saf" -> "true")
     else Map("saf" -> "false")
 
+  @JsonIgnore
   def isPartner: Boolean = {
     val isForcesPartner = Some(true)
     val isNotForcesMember = Some(false)

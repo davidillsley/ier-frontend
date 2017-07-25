@@ -20,8 +20,7 @@ class PreviousAddressPostcodeStep @Inject() (
     val addressService: AddressService,
     val scotlandService: ScotlandService,
     val remoteAssets: RemoteAssets,
-    val ordinary: OrdinaryControllers,
-    val Messages: Messages
+    val ordinary: OrdinaryControllers
 ) extends OrdinaryStep
   with PreviousAddressPostcodeMustache
   with PreviousAddressForms

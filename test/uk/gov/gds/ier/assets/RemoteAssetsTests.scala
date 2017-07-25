@@ -7,7 +7,7 @@ import uk.gov.gds.ier.test._
 
 class RemoteAssetsTests extends UnitTestSuite {
 
-  val fakeConfig = new Config(Configuration.root()) {
+  val fakeConfig = new Config(Configuration.empty()) {
     override def assetsPath = "/my-asset-path"
     override def revision = "abcdef1234567890abcdef1234567890abcdef12"
   }

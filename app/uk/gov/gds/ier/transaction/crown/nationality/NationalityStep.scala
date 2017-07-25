@@ -21,8 +21,7 @@ class NationalityStep @Inject ()(
     val config: Config,
     val encryptionService : EncryptionService,
     val remoteAssets: RemoteAssets,
-    val crown: CrownControllers,
-    val Messages: Messages
+    val crown: CrownControllers
 ) extends CrownStep
     with NationalityForms
     with NationalityMustache

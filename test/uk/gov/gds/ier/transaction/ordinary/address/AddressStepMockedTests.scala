@@ -31,7 +31,6 @@ class AddressStepMockedTests extends MockingTestSuite {
     val mockedAddressService = mock[AddressService]
     val mockedRemoteAssets = mock[RemoteAssets]
     val mockedControllers = mock[OrdinaryControllers]
-    val mockMessages = mock[Messages]
 
     val addressStep = new AddressStep(
       mockedJsonSerialiser,
@@ -39,8 +38,7 @@ class AddressStepMockedTests extends MockingTestSuite {
       mockedEncryptionService,
       mockedAddressService,
       mockedRemoteAssets,
-      mockedControllers,
-      mockMessages
+      mockedControllers
     )
 
     val postcode = "L7 7AJ"
@@ -65,7 +63,6 @@ class AddressStepMockedTests extends MockingTestSuite {
     val mockedAddressService = mock[AddressService]
     val mockedRemoteAssets = mock[RemoteAssets]
     val mockedControllers = mock[OrdinaryControllers]
-    val mockMessages = mock[Messages]
 
     val addressStep = new AddressStep(
       mockedJsonSerialiser,
@@ -73,8 +70,7 @@ class AddressStepMockedTests extends MockingTestSuite {
       mockedEncryptionService,
       mockedAddressService,
       mockedRemoteAssets,
-      mockedControllers,
-      mockMessages
+      mockedControllers
     )
 
     val postcode = "L7 7AJ"

@@ -1,5 +1,6 @@
 package uk.gov.gds.ier.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import org.joda.time.LocalDate
 
 case class DateOfBirth(dob:Option[DOB],
@@ -17,6 +18,7 @@ case class DOB(year:Int,
     Map(key -> (year + "-" + "%02d".format(month) + "-" + "%02d".format(day)))
   }
 
+  @JsonIgnore
   def isToday = {
     val now = LocalDate.now
 

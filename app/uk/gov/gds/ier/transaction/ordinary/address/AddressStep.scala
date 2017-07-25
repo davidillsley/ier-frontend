@@ -22,8 +22,7 @@ class AddressStep @Inject() (
     val encryptionService: EncryptionService,
     val addressService: AddressService,
     val remoteAssets: RemoteAssets,
-    val ordinary: OrdinaryControllers,
-    val Messages: Messages
+    val ordinary: OrdinaryControllers
 ) extends OrdinaryStep
   with AddressMustache
   with AddressForms

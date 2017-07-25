@@ -28,8 +28,7 @@ class ConfirmationStep @Inject() (
     ierApi: IerApiService,
     val remoteAssets: RemoteAssets,
     val overseas: OverseasControllers,
-    val addressService: AddressService,
-    val Messages: Messages
+    val addressService: AddressService
   ) extends ConfirmationStepController[InprogressOverseas]
   with WithOverseasControllers
   with ConfirmationForms

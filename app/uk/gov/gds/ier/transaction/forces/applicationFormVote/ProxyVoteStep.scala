@@ -20,8 +20,7 @@ class ProxyVoteStep @Inject ()(
     val config: Config,
     val encryptionService : EncryptionService,
     val remoteAssets: RemoteAssets,
-    val forces: ForcesControllers,
-    val Messages: Messages
+    val forces: ForcesControllers
 ) extends ForcesStep
   with PostalOrProxyVoteForms
   with PostalOrProxyVoteMustache

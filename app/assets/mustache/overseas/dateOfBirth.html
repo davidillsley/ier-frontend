@@ -1,9 +1,9 @@
 <form action="{{question.postUrl}}" method="POST"  data-validation-name="dateOfBirth" 
   data-validation-type="association" class="validate" data-validation-members="dateOfBirthDate"
   data-validation-rules="allNonEmpty">
-    {{> shared/questionHeader }}
+    {{> /shared/questionHeader }}
 
-    {{> shared/validationMessages }}
+    {{> /shared/validationMessages }}
     
     <fieldset class="validate inline-fields" data-validation-name="dateOfBirthDate" 
       data-validation-type="fieldset" data-validation-rules="allNonEmpty" 

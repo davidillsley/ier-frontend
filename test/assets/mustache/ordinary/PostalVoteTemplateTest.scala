@@ -8,7 +8,6 @@ class PostalVoteTemplateTest
   with PostalVoteMustache {
 
   it should "properly render all properties from the model" in {
-
     running(FakeApplication()) {
       val data = PostalVoteModel(
         question = Question(postUrl = "/whatever-url",

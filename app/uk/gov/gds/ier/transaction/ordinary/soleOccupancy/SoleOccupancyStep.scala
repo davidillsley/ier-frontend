@@ -25,8 +25,7 @@ class SoleOccupancyStep @Inject ()(
     val encryptionService : EncryptionService,
     val remoteAssets: RemoteAssets,
     val ordinary: OrdinaryControllers,
-    val scotlandService: ScotlandService,
-    val Messages: Messages
+    val scotlandService: ScotlandService
 ) extends OrdinaryStep
   with SoleOccupancyForms
   with SoleOccupancyMustache

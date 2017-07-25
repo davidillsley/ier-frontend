@@ -1,12 +1,12 @@
 <form action="{{question.postUrl}}" method="POST">
 
-    {{> shared/questionHeader }}
+    {{> /shared/questionHeader }}
 
     {{#displayAddress}}
     <p>{{addressLine}}<br />{{postcode}}</p>
     {{/displayAddress}}
 
-    {{> shared/validationMessages }}
+    {{> /shared/validationMessages }}
 
     <fieldset
             class="validate"

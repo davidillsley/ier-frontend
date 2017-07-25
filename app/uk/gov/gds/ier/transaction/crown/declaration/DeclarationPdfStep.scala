@@ -19,8 +19,7 @@ class DeclarationPdfStep @Inject ()(
     val encryptionService : EncryptionService,
     val declarationPdfDownloadService: DeclarationPdfDownloadService,
     val remoteAssets: RemoteAssets,
-    val crown: CrownControllers,
-    val Messages: Messages
+    val crown: CrownControllers
 ) extends CrownStep
   with WithDeclarationPdfDownloadService
   with DeclarationPdfForms

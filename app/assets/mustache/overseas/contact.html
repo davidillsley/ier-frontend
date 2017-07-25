@@ -1,14 +1,14 @@
 <form action="{{question.postUrl}}" method="POST" >
 
-    {{> shared/questionHeader }}
+    {{> /shared/questionHeader }}
 
-    {{> shared/validationMessages }}
+    {{> /shared/validationMessages }}
 
     <fieldset class="validate {{contactFieldSet.classes}}" data-validation-name="contact" data-validation-type="fieldset" data-validation-rules="atLeastOneNonEmpty"
               data-validation-children="post phoneOption emailOption">
 
         <label class="selectable {{showEmailFieldFlag.value}}"  >
-            <input type="checkbox" id="{{contactEmailCheckbox.id}}" name="{{contactEmailCheckbox.name}}" value="true" {{contactEmailCheckbox.attributes}}
+            <input type="checkbox" id="{{contactEmailCheckbox.id}}" name="{{contactEmailCheckbox.name}}" value="true" {{{contactEmailCheckbox.attributes}}}
                    class="validate {{contactEmailCheckbox.classes}}" data-validation-name="emailOption"  data-validation-type="field"
                    data-validation-rules="nonEmpty" >Email
         </label>
@@ -25,7 +25,7 @@
         </div>
 
         <label class="selectable"  >
-           <input type="checkbox" id="{{contactPhoneCheckbox.id}}" name="{{contactPhoneCheckbox.name}}" value="true" {{contactPhoneCheckbox.attributes}}
+           <input type="checkbox" id="{{contactPhoneCheckbox.id}}" name="{{contactPhoneCheckbox.name}}" value="true" {{{contactPhoneCheckbox.attributes}}}
                   class=" validate {{contactPhoneCheckbox.classes}}" data-validation-name="phoneOption"  data-validation-type="field"
                   data-validation-rules="nonEmpty" >Phone call
         </label>
@@ -42,7 +42,7 @@
         </div>
 
         <label class="selectable"  >
-            <input type="checkbox" id="{{contactPostCheckbox.id}}" name="{{contactPostCheckbox.name}}" value="true" {{contactPostCheckbox.attributes}}
+            <input type="checkbox" id="{{contactPostCheckbox.id}}" name="{{contactPostCheckbox.name}}" value="true" {{{contactPostCheckbox.attributes}}}
                    class=" validate {{contactPostCheckbox.classes}}" data-validation-name="post"  data-validation-type="field"
                    data-validation-rules="nonEmpty" >Post
         </label>

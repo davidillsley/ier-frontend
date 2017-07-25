@@ -19,8 +19,7 @@ class PreviousAddressPostcodeStep @Inject() (
     val encryptionService: EncryptionService,
     val addressService: AddressService,
     val remoteAssets: RemoteAssets,
-    val forces: ForcesControllers,
-    val Messages: Messages
+    val forces: ForcesControllers
 ) extends ForcesStep
   with PreviousAddressPostcodeMustache
   with PreviousAddressForms

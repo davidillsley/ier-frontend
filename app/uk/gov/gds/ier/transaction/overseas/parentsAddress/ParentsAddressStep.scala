@@ -21,8 +21,7 @@ class ParentsAddressStep @Inject() (
     val encryptionService: EncryptionService,
     val addressService: AddressService,
     val remoteAssets: RemoteAssets,
-    val overseas: OverseasControllers,
-    val Messages: Messages
+    val overseas: OverseasControllers
 ) extends OverseaStep
   with ParentsAddressLookupMustache
   with ParentsAddressForms

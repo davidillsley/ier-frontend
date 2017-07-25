@@ -32,8 +32,7 @@ class LocalAuthorityController @Inject() (
     val encryptionService: EncryptionService,
     val config: Config,
     val remoteAssets: RemoteAssets,
-    val scotlandService: ScotlandService,
-    val Messages: Messages
+    val scotlandService: ScotlandService
 ) extends Controller
   with ApiResults
   with WithSerialiser

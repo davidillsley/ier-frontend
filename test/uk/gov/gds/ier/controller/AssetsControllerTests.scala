@@ -9,7 +9,7 @@ import uk.gov.gds.ier.filter.AssetsCacheFilter
 
 class AssetsControllerTests extends ControllerTestSuite {
   private def createGlobalConfigWith(revisionNo: String) = {
-    val mockConfig = new Config(Configuration.root()) {
+    val mockConfig = new Config(Configuration.empty()) {
       override def revision = revisionNo
     }
 

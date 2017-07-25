@@ -19,8 +19,7 @@ class PreviousAddressPostcodeStep @Inject() (
     val encryptionService: EncryptionService,
     val remoteAssets: RemoteAssets,
     val addressService: AddressService,
-    val crown: CrownControllers,
-    val Messages: Messages
+    val crown: CrownControllers
 ) extends CrownStep
   with PreviousAddressPostcodeMustache
   with PreviousAddressForms

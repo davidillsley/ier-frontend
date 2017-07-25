@@ -20,8 +20,7 @@ class DateLeftArmyStep @Inject() (
     val config: Config,
     val encryptionService: EncryptionService,
     val remoteAssets: RemoteAssets,
-    val overseas: OverseasControllers,
-    val Messages: Messages
+    val overseas: OverseasControllers
 ) extends DateLeftSpecialStep with WithMessages {
 
   val service = "member of the armed forces"
@@ -40,8 +39,7 @@ class DateLeftCrownStep @Inject() (
     val config: Config,
     val encryptionService: EncryptionService,
     val remoteAssets: RemoteAssets,
-    val overseas: OverseasControllers,
-    val Messages: Messages
+    val overseas: OverseasControllers
 ) extends DateLeftSpecialStep with WithMessages {
 
   val service = "Crown Servant"
@@ -60,8 +58,7 @@ class DateLeftCouncilStep @Inject() (
     val config: Config,
     val encryptionService: EncryptionService,
     val remoteAssets: RemoteAssets,
-    val overseas: OverseasControllers,
-    val Messages: Messages
+    val overseas: OverseasControllers
 ) extends DateLeftSpecialStep with WithMessages {
 
  val service = "British Council employee"

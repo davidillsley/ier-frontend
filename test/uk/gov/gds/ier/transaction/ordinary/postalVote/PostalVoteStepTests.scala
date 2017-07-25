@@ -6,7 +6,6 @@ import uk.gov.gds.ier.security.EncryptionService
 import uk.gov.gds.ier.serialiser.JsonSerialiser
 import uk.gov.gds.ier.test.MockingTestSuite
 import uk.gov.gds.ier.assets.RemoteAssets
-import uk.gov.gds.ier.langs.Messages
 import uk.gov.gds.ier.service.ScotlandService
 import uk.gov.gds.ier.transaction.ordinary.OrdinaryControllers
 
@@ -18,15 +17,13 @@ class PostalVoteStepTests extends MockingTestSuite {
     val mockedEncryptionService = mock[EncryptionService]
     val mockedRemoteAssets = mock[RemoteAssets]
     val mockedControllers = mock[OrdinaryControllers]
-    val mockMessages = mock[Messages]
 
     val postalVoteStep = new PostalVoteStep(
       mockedJsonSerialiser,
       mockedConfig,
       mockedEncryptionService,
       mockedRemoteAssets,
-      mockedControllers,
-      mockMessages
+      mockedControllers
     )
 
     val currentState = completeOrdinaryApplication.copy(postalVote = Some(PostalVote(

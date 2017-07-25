@@ -27,8 +27,7 @@ class ConfirmationStep @Inject() (
     val addressService: AddressService,
     val remoteAssets: RemoteAssets,
     val forces: ForcesControllers,
-    ierApi: IerApiService,
-    val Messages: Messages)
+    ierApi: IerApiService)
   extends ConfirmationStepController[InprogressForces]
   with ConfirmationForms
   with ConfirmationMustache

@@ -7,18 +7,6 @@ import uk.gov.gds.ier.config.Config
 
 class CountryControllerTests extends ControllerTestSuite {
 
-  private def createGlobalConfigWith(availableForScotlandFlag: Boolean) = {
-    val mockConfig = new Config(Configuration.root()) {
-      override def availableForScotland = availableForScotlandFlag
-    }
-//
-//    Some(new DynamicGlobal {
-//      override def bindings = { binder =>
-//        binder bind classOf[uk.gov.gds.ier.config.Config] toInstance mockConfig
-//      }
-//    })
-  }
-
   behavior of "CountryController.get"
   it should "display the page" in {
     running(FakeApplication()) {

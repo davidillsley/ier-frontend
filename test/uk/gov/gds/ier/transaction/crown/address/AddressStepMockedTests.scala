@@ -10,7 +10,6 @@ import uk.gov.gds.ier.service.AddressService
 import uk.gov.gds.ier.step.GoTo
 import uk.gov.gds.ier.controller.routes.ExitController
 import uk.gov.gds.ier.assets.RemoteAssets
-import uk.gov.gds.ier.langs.Messages
 
 /*
  * This test mock the AddressService.
@@ -26,7 +25,6 @@ class AddressStepMockedTests extends MockingTestSuite {
     val mockedAddressService = mock[AddressService]
     val mockedRemoteAssets = mock[RemoteAssets]
     val mockCrownControllers = mock[CrownControllers]
-    val mockMessages = mock[Messages]
 
     val addressStep = new AddressStep(
       mockedJsonSerialiser,
@@ -34,8 +32,7 @@ class AddressStepMockedTests extends MockingTestSuite {
       mockedEncryptionService,
       mockedAddressService,
       mockedRemoteAssets,
-      mockCrownControllers,
-      mockMessages
+      mockCrownControllers
     )
 
     val postcode = "EH1 1AA"

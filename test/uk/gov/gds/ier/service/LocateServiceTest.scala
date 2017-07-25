@@ -10,7 +10,7 @@ import uk.gov.gds.ier.guice.WithConfig
 
 class LocateServiceTest extends UnitTestSuite {
 
-  class MockConfig extends Config(Configuration.root()) {
+  class MockConfig extends Config(Configuration.empty()) {
     override def locateUrl = "http://locate/addresses"
     override def locateAuthorityUrl = "http://locate/authority"
     override def locateApiAuthorizationToken = "abc"

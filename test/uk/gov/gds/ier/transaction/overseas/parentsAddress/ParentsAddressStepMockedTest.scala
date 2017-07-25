@@ -10,7 +10,6 @@ import uk.gov.gds.ier.controller.routes._
 import uk.gov.gds.ier.transaction.overseas.InprogressOverseas
 import uk.gov.gds.ier.step.GoTo
 import uk.gov.gds.ier.assets.RemoteAssets
-import uk.gov.gds.ier.langs.Messages
 
 class ParentsAddressStepMockedTest
   extends MockingControllerTestSuite
@@ -23,7 +22,6 @@ class ParentsAddressStepMockedTest
   val mockedRemoteAssets = mock[RemoteAssets]
   val scotPostcode = "EH1 1AA"
   val englPostcode = "WR2 6NJ"
-  val mockMessages = mock[Messages]
 
   when (mockedAddressService.isScotland(scotPostcode)).thenReturn(true)
   when (mockedAddressService.isScotland(englPostcode)).thenReturn(false)
@@ -42,8 +40,7 @@ class ParentsAddressStepMockedTest
       mockedEncryptionService,
       mockedAddressService,
       mockedRemoteAssets,
-      overseas,
-      mockMessages
+      overseas
     )
     val transferedState = addressStep.nextStep(applicationWithScotParentsAddress)
     transferedState should be (GoTo(ExitController.scotland))
@@ -56,8 +53,7 @@ class ParentsAddressStepMockedTest
       mockedEncryptionService,
       mockedAddressService,
       mockedRemoteAssets,
-      overseas,
-      mockMessages
+      overseas
     )
     val transferedState = addressStep.nextStep(applicationWithEnglParentsAddress)
     transferedState should be (mockParentsAddressSelectStep)

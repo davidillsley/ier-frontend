@@ -56,7 +56,7 @@ class ContactTemplateTest extends TemplateTestSuite {
       contactEmailCheckboxInput.attr("id") should be("contactEmailCheckboxId")
       contactEmailCheckboxInput.attr("name") should be("contactEmailCheckboxName")
       contactEmailCheckboxInput.attr("class") should include("contactEmailCheckboxClass")
-      contactEmailCheckboxInput.attr("foo") should include("foo")
+      contactEmailCheckboxInput.attr("foo") should be("foo")
 
       val contactEmailTextInput = doc.select("input[id*=contactEmailTextId]").first()
       contactEmailTextInput.attr("id") should be("contactEmailTextId")

@@ -71,16 +71,6 @@ class JavaMustache extends MustacheAPI{
     Html(writer.toString())
   }
 
-  private[jba] def loadAllTemplate: Unit = {
-    Logger("mustache").info("Load all mustache template")
-
-    Play.current.resource("mustache/mustache.tmpl").map { url =>
-      for(fileName <- Source.fromFile(url.getFile()).getLines)
-        readTemplate(fileName)
-    }.getOrElse {
-      Logger("mustache").error("Impossible to read file mustache/mustache.tmpl")
-    }
-  }
 }
 
 object Mustache {

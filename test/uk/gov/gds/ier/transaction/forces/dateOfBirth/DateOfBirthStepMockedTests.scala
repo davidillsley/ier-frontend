@@ -5,7 +5,6 @@ import uk.gov.gds.ier.security.EncryptionService
 import uk.gov.gds.ier.serialiser.JsonSerialiser
 import uk.gov.gds.ier.test._
 import uk.gov.gds.ier.assets.RemoteAssets
-import uk.gov.gds.ier.langs.Messages
 import uk.gov.gds.ier.validation.constants.DateOfBirthConstants
 import uk.gov.gds.ier.model.DateOfBirth
 import uk.gov.gds.ier.model.noDOB
@@ -26,15 +25,13 @@ class DateOfBirthStepMockedTests
     val mockedConfig = mock[Config]
     val mockedEncryptionService = mock[EncryptionService]
     val mockedRemoteAssets = mock[RemoteAssets]
-    val mockMessages = mock[Messages]
 
     val dobStep = new DateOfBirthStep(
       mockedJsonSerialiser,
       mockedConfig,
       mockedEncryptionService,
       mockedRemoteAssets,
-      forces,
-      mockMessages
+      forces
     )
 
     when(mockNameStep.routing).thenReturn(routes("/register-to-vote/name"))
