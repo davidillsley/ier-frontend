@@ -22,7 +22,7 @@
               class="radio validate {{postCheckboxNoAndVoteInPerson.classes}}"
               data-validation-name="postalNo"
               data-validation-type="field"
-              data-validation-rules="nonEmpty" {{postCheckboxNoAndVoteInPerson.attributes}}>
+              data-validation-rules="nonEmpty" {{{postCheckboxNoAndVoteInPerson.attributes}}}>
                 {{messages.ordinary_postalVote_voteInPerson_option}}
         </label>
 
@@ -35,7 +35,7 @@
                     class="radio validate {{postCheckboxNoAndAlreadyHave.classes}}"
                     data-validation-name="postalNo"
                     data-validation-type="field"
-                    data-validation-rules="nonEmpty" {{postCheckboxNoAndAlreadyHave.attributes}}>
+                    data-validation-rules="nonEmpty" {{{postCheckboxNoAndAlreadyHave.attributes}}}>
             {{messages.ordinary_postalVote_voteAlreadyHave_option}}
         </label>
         <div id="{{postCheckboxNoAndAlreadyHave.id}}_help"
@@ -55,7 +55,7 @@
               data-validation-name="postalYes"
               data-validation-type="field"
               data-validation-rules="nonEmpty"
-              {{postCheckboxYes.attributes}}
+              {{{postCheckboxYes.attributes}}}
               data-journey-click="Postal vote:Yes:Yes I want a postal vote">
                 {{messages.ordinary_postalVote_postalVote_option}}
         </label>
@@ -77,7 +77,7 @@
 <label for="{{deliveryByEmail.id}}" class="selectable" style="margin-bottom: 16px;">
     <input type="radio" id="{{deliveryByEmail.id}}" name="{{deliveryByEmail.name}}" value="{{deliveryByEmail.value}}" class="radio  
       validate" data-validation-name="deliveryMethodEmail" data-validation-type="field" 
-      data-validation-rules="nonEmpty" {{deliveryByEmail.attributes}}>
+      data-validation-rules="nonEmpty" {{{deliveryByEmail.attributes}}}>
         {{messages.ordinary_postalVote_postalVote_deliveryEmail_option}}
 </label>
 
@@ -94,7 +94,7 @@
 <label for="{{deliveryByPost.id}}" class="selectable">
     <input type="radio" id="{{deliveryByPost.id}}" name="{{deliveryByPost.name}}" value="{{deliveryByPost.value}}" class="radio  
       validate" data-validation-name="deliveryMethodPost" data-validation-type="field" 
-      data-validation-rules="nonEmpty" {{deliveryByPost.attributes}}>
+      data-validation-rules="nonEmpty" {{{deliveryByPost.attributes}}}>
         {{messages.ordinary_postalVote_postalVote_deliveryPost_option}}
 </label>
 

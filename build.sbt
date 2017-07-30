@@ -32,3 +32,5 @@ libraryDependencies += "org.julienrf" %% "play-jsmessages" % "2.0.0"
 
 // Adds additional packages into conf/routes
 // play.sbt.routes.RoutesKeys.routesImport += "com.example.binders._"
+
+//managedResourceDirectories in Assets += baseDirectory.value / "app" / "assets" / "mustache" / "govuk_template_inheritance" / "assets"

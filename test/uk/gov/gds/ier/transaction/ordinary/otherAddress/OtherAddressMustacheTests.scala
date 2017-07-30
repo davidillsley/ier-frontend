@@ -11,7 +11,7 @@ class OtherAddressMustacheTests
   with OtherAddressMustache {
 
   behavior of "OtherAddressMustache"
-  it should "create model from empty form correctly" in {
+  it should "create model from empty form correctly" in runningApp {
     val form = otherAddressForm
 
     val result = mustache.data(
